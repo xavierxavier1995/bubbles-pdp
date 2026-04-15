@@ -1098,7 +1098,7 @@ export default function Produto2() {
                     A Bubbles® nasceu da vontade de transformar a experiência de banho e tosa em algo mais profissional, sensorial e consciente, tanto para o groomer quanto para o pet.
                   </p>
                   <p>
-                    Com <span className="text-[#F4CDD4] font-black">mais de 7 anos de história</span>, elevamos o padrão do mercado, transformando cada atendimento em uma experiência memorável.
+                    Com <span className="text-[#F4CDD4] font-semibold">mais de 7 anos de história</span>, elevamos o padrão do mercado, transformando cada atendimento em uma experiência memorável.
                   </p>
                 </div>
               </motion.div>
@@ -1124,9 +1124,9 @@ export default function Produto2() {
                     <div className="w-10 h-10 bg-[#F4CDD4]/10 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-[#F4CDD4] transition-all duration-500">
                       <stat.icon size={18} className="text-[#F4CDD4] group-hover:text-[#080808] transition-colors duration-500" />
                     </div>
-                    <p className="text-xl font-black text-white mb-1 tracking-tight">{stat.val}</p>
-                    <p className="text-[#F4CDD4] text-[11px] font-black uppercase tracking-widest mb-1">{stat.label}</p>
-                    <p className="text-white/40 text-[10px] font-bold uppercase tracking-tighter">{stat.desc}</p>
+                    <p className="text-xl font-semibold text-white mb-1 tracking-tight">{stat.val}</p>
+                    <p className="text-[#F4CDD4] text-[11px] font-semibold uppercase tracking-widest mb-1">{stat.label}</p>
+                    <p className="text-white/40 text-[10px] font-semibold uppercase tracking-tighter">{stat.desc}</p>
                   </motion.div>
                 ))}
               </div>
