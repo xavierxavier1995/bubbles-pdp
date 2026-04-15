@@ -228,10 +228,10 @@ export default function Produto2() {
               ))}
               {/* Arrows for desktop */}
               <div className="hidden md:flex items-center justify-center gap-4 mt-2">
-                <button onClick={prevImage} className="bg-[var(--pink-light)] text-[var(--pink)] hover:bg-[var(--pink)] hover:text-white transition-colors p-2 rounded-full shadow-sm">
+                <button onClick={prevImage} className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors p-2 rounded-full">
                   <ChevronLeft className="w-5 h-5" />
                 </button>
-                <button onClick={nextImage} className="bg-[var(--pink-light)] text-[var(--pink)] hover:bg-[var(--pink)] hover:text-white transition-colors p-2 rounded-full shadow-sm">
+                <button onClick={nextImage} className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors p-2 rounded-full">
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
@@ -251,22 +251,20 @@ export default function Produto2() {
               {/* Expand Icon */}
               <button 
                 onClick={() => setIsFullscreen(true)}
-                className="absolute top-4 left-4 bg-white/80 backdrop-blur-sm text-black p-2 rounded-lg shadow-sm hover:bg-white hover:text-[var(--pink)] transition-colors z-10 opacity-0 group-hover:opacity-100 md:opacity-100"
+                className="absolute top-4 left-4 bg-white/80 backdrop-blur-sm text-black p-2 rounded-lg shadow-sm hover:bg-white transition-colors z-10 opacity-0 group-hover:opacity-100 md:opacity-100"
               >
-                <Maximize2 className="w-5 h-5" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="15 3 21 3 21 9" />
+                  <polyline points="9 21 3 21 3 15" />
+                  <line x1="21" y1="3" x2="14" y2="10" />
+                  <line x1="3" y1="21" x2="10" y2="14" />
+                </svg>
               </button>
-
-              <div className="absolute top-4 right-4 bg-[var(--green)] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider z-10 flex items-center gap-1">
-                <Check className="w-3 h-3" strokeWidth={3} /> VEGANO
-              </div>
             </div>
           </div>
 
           {/* BUY BOX */}
           <div className="flex flex-col">
-            <span className="text-black text-[11px] font-bold uppercase tracking-[2px] mb-2 block">
-              LINHA ESSENTIAL · NEUTRALIZADOR DE ODORES
-            </span>
 
             <div className="mb-4">
               <h3 className="text-[14px] font-[800] text-black mb-3">Veja mais sobre o produto</h3>
@@ -296,30 +294,28 @@ export default function Produto2() {
                 <Star className="w-4 h-4 fill-current" />
               </div>
               <span className="text-[13px] text-[var(--text-light)]">4.9 · </span>
-              <a href="#reviews" className="text-[13px] text-[var(--pink)] underline font-medium hover:text-[var(--pink-dark)]">
+              <a href="#reviews" className="text-[13px] text-gray-500 underline font-medium hover:text-gray-700">
                 87 avaliações
               </a>
             </div>
 
-            <div className="mb-4 flex items-baseline gap-3 flex-wrap">
-              <span className="text-[40px] font-[950] text-black leading-none tracking-tighter">
-                R$ {(206.90 * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            <div className="mb-1">
+              <span className="bg-[var(--green)] text-white text-[12px] font-bold px-3 py-1 rounded-full">
+                10% de desconto
               </span>
-              <div className="flex flex-col">
-                <span className="text-[14px] text-gray-400 line-through font-medium">
-                  De R$ {(229.90 * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
-                <span className="text-[14px] text-[var(--pink)] font-bold">
-                  Economia de R$ {((229.90 - 206.90) * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
-              </div>
             </div>
 
-            <div className="flex items-center gap-2 mb-6">
-              <span className="bg-black text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">
-                10% OFF NO PIX
+            <div className="mb-2 flex items-baseline gap-3 flex-wrap">
+              <span className="text-[40px] font-[600] text-black leading-none tracking-tighter">
+                R$ {(206.90 * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
-              <span className="text-[13px] text-gray-500 font-medium">Ou em até 6x sem juros</span>
+              <span className="text-[15px] text-gray-400 line-through font-medium">
+                R$ {(229.90 * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </span>
+            </div>
+
+            <div className="mb-6">
+              <span className="text-[13px] text-gray-500 font-medium">6x de R$ {((206.90 * quantity) / 6).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} sem juros</span>
             </div>
             
             <div className="flex items-center gap-1 text-[14px] text-[#666] mb-6 font-medium">
@@ -327,18 +323,18 @@ export default function Produto2() {
               <span>Ganhe <strong className="text-black">R$ {((206.90 * quantity) * 0.05).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong> de cashback</span>
             </div>
 
-            <div className="grid grid-cols-3 gap-0 border-b border-gray-200 mb-8">
-              <div className="p-4 text-center border-r border-gray-200 hover:text-[var(--pink)] transition-colors group">
-                <span className="block text-[10px] text-gray-400 uppercase font-black tracking-widest mb-1">Rendimento</span>
-                <span className="block text-[15px] font-black text-black">300 banhos</span>
+            <div className="grid grid-cols-3 gap-0 border border-gray-200 rounded-[10px] bg-[#f7f7f7] mb-8">
+              <div className="p-4 text-center border-r border-gray-200">
+                <span className="block text-[10px] text-gray-400 uppercase font-medium tracking-widest mb-1">Rendimento</span>
+                <span className="block text-[15px] font-medium text-black">300 banhos</span>
               </div>
-              <div className="p-4 text-center border-r border-gray-200 hover:text-[var(--pink)] transition-colors group">
-                <span className="block text-[10px] text-gray-400 uppercase font-black tracking-widest mb-1">Custo/banho</span>
-                <span className="block text-[15px] font-black text-black">R$ 0,69</span>
+              <div className="p-4 text-center border-r border-gray-200">
+                <span className="block text-[10px] text-gray-400 uppercase font-medium tracking-widest mb-1">Custo/Banho</span>
+                <span className="block text-[15px] font-medium text-black">R$ 0,69</span>
               </div>
-              <div className="p-4 text-center hover:text-[var(--pink)] transition-colors group">
-                <span className="block text-[10px] text-gray-400 uppercase font-black tracking-widest mb-1">Diluição</span>
-                <span className="block text-[15px] font-black text-black italic">1:5</span>
+              <div className="p-4 text-center">
+                <span className="block text-[10px] text-gray-400 uppercase font-medium tracking-widest mb-1">Diluição</span>
+                <span className="block text-[15px] font-medium text-black">1:5</span>
               </div>
             </div>
 
@@ -347,37 +343,37 @@ export default function Produto2() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
                 <div className="flex flex-col items-center text-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-[#fdf2f4] flex items-center justify-center">
-                    <RotateCcw className="w-5 h-5 text-[#F4CDD4]" strokeWidth={2.5} />
+                    <RotateCcw className="w-5 h-5 text-black" strokeWidth={1.5} />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-[11px] font-black text-black uppercase tracking-tighter">Garantia</span>
+                    <span className="text-[11px] font-medium text-black uppercase tracking-tighter">Garantia</span>
                     <span className="text-[10px] text-gray-400 font-medium whitespace-nowrap">7 dias para trocar</span>
                   </div>
                 </div>
                 <div className="flex flex-col items-center text-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-[#fdf2f4] flex items-center justify-center">
-                    <ShieldCheck className="w-5 h-5 text-[#F4CDD4]" strokeWidth={2.5} />
+                    <ShieldCheck className="w-5 h-5 text-black" strokeWidth={1.5} />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-[11px] font-black text-black uppercase tracking-tighter">Compra segura</span>
+                    <span className="text-[11px] font-medium text-black uppercase tracking-tighter">Compra segura</span>
                     <span className="text-[10px] text-gray-400 font-medium whitespace-nowrap">Sem burocracia</span>
                   </div>
                 </div>
                 <div className="flex flex-col items-center text-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-[#fdf2f4] flex items-center justify-center">
-                    <CreditCard className="w-5 h-5 text-[#F4CDD4]" strokeWidth={2.5} />
+                    <CreditCard className="w-5 h-5 text-black" strokeWidth={1.5} />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-[11px] font-black text-black uppercase tracking-tighter">Até 6x</span>
+                    <span className="text-[11px] font-medium text-black uppercase tracking-tighter">Até 6x S/ JUROS</span>
                     <span className="text-[10px] text-gray-400 font-medium whitespace-nowrap">Com nota fiscal</span>
                   </div>
                 </div>
                 <div className="flex flex-col items-center text-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-[#fdf2f4] flex items-center justify-center">
-                    <Headset className="w-5 h-5 text-[#F4CDD4]" strokeWidth={2.5} />
+                    <Headset className="w-5 h-5 text-black" strokeWidth={1.5} />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-[11px] font-black text-black uppercase tracking-tighter">Suporte</span>
+                    <span className="text-[11px] font-medium text-black uppercase tracking-tighter">Suporte</span>
                     <span className="text-[10px] text-gray-400 font-medium whitespace-nowrap">Expertise Real</span>
                   </div>
                 </div>
@@ -387,7 +383,7 @@ export default function Produto2() {
 
             {/* QUANTITY AND ADD TO CART - SIDE BY SIDE */}
             <div className="mb-4">
-              <p className="font-[700] text-[12px] mb-2 text-[var(--text-dark)]">Quantidade: <span className="text-[#888] font-normal">{quantity} no carrinho</span></p>
+              <p className="font-[700] text-[12px] mb-2 text-[var(--text-dark)]">Quantidade:</p>
               <div className="flex flex-col gap-3">
                 <div className="flex gap-3">
                   <div className="flex items-center border border-[#E0E0E0] rounded-[var(--radius-md)] h-[52px] bg-white w-[120px] flex-shrink-0">
@@ -408,7 +404,7 @@ export default function Produto2() {
 
                   <button 
                     ref={addToCartRef}
-                    className="flex-1 h-[52px] bg-[#25D366] hover:bg-[#1DA851] text-white font-[900] text-[18px] uppercase tracking-wide rounded-[var(--radius-md)] flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(37,211,102,0.4)] active:scale-[0.98]"
+                    className="flex-1 h-[52px] bg-[#25D366] hover:bg-[#1DA851] text-white font-semibold text-[18px] uppercase tracking-wide rounded-[10px] flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(37,211,102,0.4)] active:scale-[0.98]"
                   >
                     Comprar
                   </button>
@@ -444,7 +440,7 @@ export default function Produto2() {
                 </div>
                 <button 
                   type="submit"
-                  className="h-[48px] px-6 bg-[#F4CDD4] text-black font-black text-[12px] uppercase tracking-widest rounded-xl hover:bg-[#eec0c9] transition-all active:scale-95"
+                  className="h-[48px] px-6 bg-[#F4CDD4] text-black font-semibold text-[12px] uppercase tracking-widest rounded-[10px] hover:bg-[#eec0c9] transition-all active:scale-95"
                 >
                   Calcular
                 </button>
@@ -495,7 +491,7 @@ export default function Produto2() {
             <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-12">
               
               <div className="md:w-1/3 text-center md:text-left">
-                <h2 className="text-[32px] md:text-[40px] font-black text-black leading-[1.1] uppercase tracking-tighter italic">
+                <h2 className="text-[32px] md:text-[40px] font-semibold text-black leading-[1.1] uppercase tracking-tighter">
                   O Segredo <br className="hidden md:block"/> dos Melhores <br className="hidden md:block"/> Groomers.
                 </h2>
               </div>
@@ -512,7 +508,7 @@ export default function Produto2() {
                       <item.icon size={20} strokeWidth={2} />
                     </div>
                     <div>
-                      <h3 className="font-black text-[16px] text-black uppercase tracking-tight mb-1">{item.title}</h3>
+                      <h3 className="font-semibold text-[16px] text-black uppercase tracking-tight mb-1">{item.title}</h3>
                       <p className="text-[13px] text-gray-400 font-medium leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
@@ -525,7 +521,7 @@ export default function Produto2() {
 
         {/* BLOCO 6: ACCORDIONS */}
         <section className="max-w-[800px] mx-auto px-4 py-16">
-          <h2 className="text-[20px] md:text-[24px] font-[800] text-[var(--text-dark)] mb-6 text-center">
+          <h2 className="text-[22px] md:text-[26px] font-semibold text-[var(--text-dark)] mb-6 text-center">
             Tudo sobre o produto
           </h2>
           
@@ -538,7 +534,7 @@ export default function Produto2() {
                 className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors"
               >
                 <span className="font-bold text-[15px] text-[var(--text-dark)] flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-[#F4CDD4]" /> Descrição
+                  <FileText className="w-4 h-4 text-[#999]" /> Descrição
                 </span>
                 {openAccordion === 1 ? <ChevronUp className="w-5 h-5 text-[var(--text-mid)]" /> : <ChevronDown className="w-5 h-5 text-[var(--text-mid)]" />}
               </button>
@@ -559,18 +555,18 @@ export default function Produto2() {
                 className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors"
               >
                 <span className="font-bold text-[15px] text-[var(--text-dark)] flex items-center gap-2">
-                  <Star className="w-4 h-4 text-[#F4CDD4]" /> Benefícios
+                  <Star className="w-4 h-4 text-[#999]" /> Benefícios
                 </span>
                 {openAccordion === 2 ? <ChevronUp className="w-5 h-5 text-[var(--text-mid)]" /> : <ChevronDown className="w-5 h-5 text-[var(--text-mid)]" />}
               </button>
               {openAccordion === 2 && (
                 <div className="px-6 pb-6 pt-2 text-[14px] text-[var(--text-mid)] leading-relaxed">
                   <ul className="space-y-2">
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#F4CDD4]" /> <strong className="text-black font-bold">Neutraliza odores</strong> da pelagem, atuando nas principais fontes de mau cheiro</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#F4CDD4]" /> <strong className="text-black font-bold">Nova fórmula com maior formação de espuma</strong>, facilitando o banho</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#F4CDD4]" /> <strong className="text-black font-bold">Fragrância marcante de abacaxi</strong> (Pineapple), com sensação tropical</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#F4CDD4]" /> Limpeza eficiente <strong className="text-black font-bold">sem agredir a pele e os pelos</strong></li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#F4CDD4]" /> Deixa a pelagem <strong className="text-black font-bold">macia, leve e perfumada</strong> por mais tempo</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> <strong className="text-black font-bold">Neutraliza odores</strong> da pelagem, atuando nas principais fontes de mau cheiro</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> <strong className="text-black font-bold">Nova fórmula com maior formação de espuma</strong>, facilitando o banho</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> <strong className="text-black font-bold">Fragrância marcante de abacaxi</strong> (Pineapple), com sensação tropical</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> Limpeza eficiente <strong className="text-black font-bold">sem agredir a pele e os pelos</strong></li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> Deixa a pelagem <strong className="text-black font-bold">macia, leve e perfumada</strong> por mais tempo</li>
                   </ul>
                 </div>
               )}
@@ -583,7 +579,7 @@ export default function Produto2() {
                 className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors"
               >
                 <span className="font-bold text-[15px] text-[var(--text-dark)] flex items-center gap-2">
-                  <List className="w-4 h-4 text-[#F4CDD4]" /> Modo de uso
+                  <List className="w-4 h-4 text-[#999]" /> Modo de uso
                 </span>
                 {openAccordion === 3 ? <ChevronUp className="w-5 h-5 text-[var(--text-mid)]" /> : <ChevronDown className="w-5 h-5 text-[var(--text-mid)]" />}
               </button>
@@ -601,7 +597,7 @@ export default function Produto2() {
                 className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors"
               >
                 <span className="font-bold text-[15px] text-[var(--text-dark)] flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-[#F4CDD4]" /> Composição
+                  <Activity className="w-4 h-4 text-[#999]" /> Composição
                 </span>
                 {openAccordion === 4 ? <ChevronUp className="w-5 h-5 text-[var(--text-mid)]" /> : <ChevronDown className="w-5 h-5 text-[var(--text-mid)]" />}
               </button>
@@ -619,7 +615,7 @@ export default function Produto2() {
         <section className="bg-white py-24 px-4 overflow-hidden">
           <div className="max-w-[1100px] mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-[28px] md:text-[36px] font-black text-black leading-tight uppercase tracking-tighter mb-4 italic">
+              <h2 className="text-[22px] md:text-[26px] font-semibold text-black leading-tight uppercase tracking-tighter mb-4">
                 O Padrão Bubbles vs. O Mercado Comum
               </h2>
               <p className="text-[14px] md:text-[16px] text-gray-500 max-w-2xl mx-auto font-medium">
@@ -627,56 +623,59 @@ export default function Produto2() {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch">
               
               {/* Lado Negativo: SEM Bubbles */}
-              <div className="relative p-8 md:p-12 rounded-[32px] bg-[#F7F7F7] border border-gray-100">
+              <div className="relative p-8 md:p-10 rounded-[10px] bg-[#F9F9F9] border border-dashed border-gray-300 opacity-70">
                 <div className="mb-8">
-                  <span className="text-[10px] font-black text-gray-400 uppercase tracking-[2px] mb-2 block">Marcas Genéricas</span>
-                  <h3 className="text-xl md:text-2xl font-black text-black uppercase">A Realidade Comum</h3>
+                  <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-[2px] mb-2 block">Marcas Genéricas</span>
+                  <h3 className="text-xl md:text-2xl font-semibold text-gray-500 uppercase">A Realidade Comum</h3>
                 </div>
                 
-                <ul className="space-y-6">
+                <ul className="space-y-5">
                   {[
                     "Odor de mau cheiro volta em poucas horas",
                     "Pelagem ressecada, opaca e sem vida",
                     "Fórmula que apenas máscara o cheiro",
                     "Baixa rendimento: gasta mais para limpar"
                   ].map((text, i) => (
-                    <li key={i} className="flex items-start gap-4">
-                      <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full border border-red-200 flex items-center justify-center">
-                        <X size={12} className="text-red-400" strokeWidth={3} />
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full border border-red-200 bg-red-50 flex items-center justify-center">
+                        <X size={11} className="text-red-400" strokeWidth={3} />
                       </div>
-                      <span className="text-[15px] font-medium text-gray-500 leading-snug">{text}</span>
+                      <span className="text-[14px] font-medium text-gray-400 leading-snug">{text}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Lado Positivo: COM Bubbles */}
-              <div className="relative p-8 md:p-12 rounded-[32px] bg-white border-2 border-[#F4CDD4] shadow-[0_20px_60px_rgba(230,0,126,0.08)]">
-                {/* Badge de destaque */}
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-xl">
-                  Escolha Profissional
+              <div className="relative p-8 md:p-10 rounded-[10px] bg-[#fdf5f7] border-2 border-[#F4CDD4] md:scale-[1.03] origin-center">
+                {/* Accent bar top */}
+                <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#F4CDD4] to-[#f0a8b8] rounded-t-[10px]" />
+
+                {/* Badge */}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black text-white text-[10px] font-semibold px-4 py-2 rounded-full uppercase tracking-widest shadow-lg z-10">
+                  <Check size={10} strokeWidth={3} /> Escolha Profissional
                 </div>
 
                 <div className="mb-8">
-                  <span className="text-[10px] font-black text-[var(--pink)] uppercase tracking-[2px] mb-2 block">Bubbles Essential</span>
-                  <h3 className="text-xl md:text-2xl font-black text-black uppercase italic">O Padrão Bubbles</h3>
+                  <span className="text-[10px] font-bold text-[var(--pink)] uppercase tracking-[2px] mb-2 block">Bubbles Essential</span>
+                  <h3 className="text-xl md:text-2xl font-semibold text-black uppercase">O Padrão Bubbles</h3>
                 </div>
                 
-                <ul className="space-y-6">
+                <ul className="space-y-5">
                   {[
                     "Odor neutralizado na molécula (Tecnologia Deoplex Clear)",
                     "Pelagem intensamente macia, brilhante e hidratada",
                     "Limpeza profunda que respeita a barreira cutânea",
                     "Diluição Real 1:5: Economia comprovada por banho"
                   ].map((text, i) => (
-                    <li key={i} className="flex items-start gap-4">
+                    <li key={i} className="flex items-start gap-3">
                       <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-[#F4CDD4] flex items-center justify-center">
-                        <Check size={12} className="text-white" strokeWidth={4} />
+                        <Check size={11} className="text-black" strokeWidth={3} />
                       </div>
-                      <span className="text-[15px] font-[700] text-black leading-snug">{text}</span>
+                      <span className="text-[15px] font-semibold text-black leading-snug">{text}</span>
                     </li>
                   ))}
                 </ul>
@@ -690,8 +689,8 @@ export default function Produto2() {
         <section className="max-w-[1000px] mx-auto px-4 py-16">
           <div className="bg-[var(--yellow-light)] border-2 border-dashed border-[var(--amber)] rounded-[var(--radius-lg)] p-6 md:p-10">
             <div className="text-center mb-8">
-              <h2 className="text-[24px] md:text-[28px] font-[800] text-[var(--text-dark)] mb-2 flex items-center justify-center gap-3">
-                <Gift className="w-8 h-8 text-[var(--orange)]" /> Kit Neutralizador Completo
+              <h2 className="text-[22px] md:text-[26px] font-semibold text-[var(--text-dark)] mb-2 flex items-center justify-center gap-3">
+                <Gift className="w-6 h-6 text-[var(--orange)]" /> Compre Junto
               </h2>
               <p className="text-[15px] text-[var(--text-mid)]">
                 O combo favorito dos groomers profissionais
@@ -745,13 +744,13 @@ export default function Produto2() {
         {/* BLOCO 9: SEÇÃO DE REVIEWS */}
         <section id="reviews" className="bg-[var(--pink-light)] py-16 px-4">
           <div className="max-w-[800px] mx-auto">
-            <h2 className="text-center text-[24px] md:text-[28px] font-[800] text-[var(--text-dark)] mb-8">
+            <h2 className="text-center text-[22px] md:text-[26px] font-semibold text-[var(--text-dark)] mb-8">
               Confira O que os groomers estão dizendo
             </h2>
 
             <div className="flex flex-col items-center mb-8">
               <div className="flex items-center gap-4 mb-2">
-                <span className="text-[52px] font-[900] text-[var(--text-dark)] leading-none">4.9</span>
+                <span className="text-[36px] font-semibold text-[var(--text-dark)] leading-none">4.9</span>
                 <div className="flex flex-col">
                   <div className="flex text-[#F4A522] mb-1">
                     <Star className="w-5 h-5 fill-current" />
@@ -779,7 +778,6 @@ export default function Produto2() {
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-bold text-[15px] text-[var(--text-dark)]">Camila R.</span>
-                      <span className="bg-[var(--pink-light)] text-[var(--pink-dark)] text-[10px] font-bold px-2 py-0.5 rounded-full">Pet Shop Fofo Pata · SP</span>
                     </div>
                     <div className="flex text-[#F4A522]">
                       <Star className="w-3 h-3 fill-current" />
@@ -791,12 +789,9 @@ export default function Produto2() {
                   </div>
                   <span className="text-[12px] text-[var(--text-light)]">15/03/2025</span>
                 </div>
-                <p className="text-[14px] text-[var(--text-mid)] leading-relaxed mb-3">
+                <p className="text-[14px] text-[var(--text-mid)] leading-relaxed">
                   &quot;Uso há 8 meses no meu pet shop e não troco por nada. O odor some de verdade, não é aquela coisa de mascarar com perfume. A diluição 1:5 rende absurdamente bem — um frasco de 5L dura quase 2 meses no meu volume de atendimento. Recomendo demais para qualquer groomer.&quot;
                 </p>
-                <div className="text-[12px] text-[var(--text-light)] flex items-center gap-1">
-                  <Heart className="w-3 h-3" /> Usa em Spitz, Golden Retriever e Shih-tzu
-                </div>
               </div>
 
               {/* Review 2 */}
@@ -805,7 +800,6 @@ export default function Produto2() {
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-bold text-[15px] text-[var(--text-dark)]">Marcos T.</span>
-                      <span className="bg-[var(--pink-light)] text-[var(--pink-dark)] text-[10px] font-bold px-2 py-0.5 rounded-full">Groomer Certificado · RJ</span>
                     </div>
                     <div className="flex text-[#F4A522]">
                       <Star className="w-3 h-3 fill-current" />
@@ -817,12 +811,9 @@ export default function Produto2() {
                   </div>
                   <span className="text-[12px] text-[var(--text-light)]">02/03/2025</span>
                 </div>
-                <p className="text-[14px] text-[var(--text-mid)] leading-relaxed mb-3">
+                <p className="text-[14px] text-[var(--text-mid)] leading-relaxed">
                   &quot;O pelo fica sedoso desde a primeira lavagem. Meus clientes percebem a diferença e sempre perguntam o que eu usei. O cheiro de abacaxi é suave e agradável, dura horas depois do banho. Melhor neutralizador que já usei em 12 anos de profissão.&quot;
                 </p>
-                <div className="text-[12px] text-[var(--text-light)] flex items-center gap-1">
-                  <Heart className="w-3 h-3" /> Golden Retriever e Labrador
-                </div>
               </div>
 
               {/* Review 3 */}
@@ -831,7 +822,6 @@ export default function Produto2() {
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-bold text-[15px] text-[var(--text-dark)]">Juliana F.</span>
-                      <span className="bg-[var(--pink-light)] text-[var(--pink-dark)] text-[10px] font-bold px-2 py-0.5 rounded-full">Tutora · MG</span>
                     </div>
                     <div className="flex text-[#F4A522]">
                       <Star className="w-3 h-3 fill-current" />
@@ -843,17 +833,14 @@ export default function Produto2() {
                   </div>
                   <span className="text-[12px] text-[var(--text-light)]">20/02/2025</span>
                 </div>
-                <p className="text-[14px] text-[var(--text-mid)] leading-relaxed mb-3">
+                <p className="text-[14px] text-[var(--text-mid)] leading-relaxed">
                   &quot;Uso em casa no meu Golden. Deixou os pelos dos meus cachorrinhos muito cheirosos e limpinhos, ficou bastante sedoso. Super aprovado e recomendo bastante! Já comprei 3 vezes.&quot;
                 </p>
-                <div className="text-[12px] text-[var(--text-light)] flex items-center gap-1">
-                  <Heart className="w-3 h-3" /> Golden Retriever
-                </div>
               </div>
             </div>
 
             <div className="flex justify-center">
-              <button className="px-8 py-3 border-2 border-[var(--pink)] text-[var(--pink)] font-bold rounded-full hover:bg-white transition-colors">
+              <button className="px-8 py-3 border-2 border-black text-black font-bold rounded-full hover:bg-gray-50 transition-colors">
                 Ver todas as 87 avaliações ›
               </button>
             </div>
@@ -863,7 +850,7 @@ export default function Produto2() {
         {/* BLOCO 10.5: VIDEO CAROUSEL (ESTILO TOLSTOY) */}
         <section className="py-20 px-4 overflow-hidden bg-white">
           <div className="max-w-[1200px] mx-auto">
-            <h2 className="text-center text-[22px] md:text-[28px] font-black text-[#0F0C0D] mb-12 uppercase tracking-tight">
+            <h2 className="text-center text-[22px] md:text-[28px] font-semibold text-[#0F0C0D] mb-12 uppercase tracking-tight">
               Veja nossos produtos em ação
             </h2>
             
@@ -983,7 +970,7 @@ export default function Produto2() {
         {/* BLOCO: VISTOS RECENTEMENTE */}
         <section className="py-12 px-4 bg-white">
           <div className="max-w-[1200px] mx-auto">
-            <h2 className="text-[18px] md:text-[20px] font-black text-[var(--text-dark)] mb-6 flex items-center gap-2 uppercase tracking-tight">
+            <h2 className="text-[18px] md:text-[20px] font-semibold text-[var(--text-dark)] mb-6 flex items-center gap-2 uppercase tracking-tight">
               <RefreshCcw className="w-4 h-4 text-[var(--pink)]" /> Vistos recentemente
             </h2>
             <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
@@ -1032,7 +1019,7 @@ export default function Produto2() {
               <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tighter"
+                className="text-2xl md:text-4xl font-semibold text-white mb-6 tracking-tighter"
               >
                 Quem é a <span className="text-[#F4CDD4]">Bubbles®?</span>
               </motion.h2>
