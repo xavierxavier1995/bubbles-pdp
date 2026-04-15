@@ -88,6 +88,61 @@ export default function Produto2() {
 
   return (
     <div className="font-poppins text-black bg-white min-h-screen relative pb-20 md:pb-0">
+      {/* SEO & STRUCTURED DATA (LIQUID READY) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": "{{ product.title }}",
+            "image": ["{{ product.featured_image | img_url: '1024x1024' }}"],
+            "description": "{{ product.description | strip_html | truncate: 160 }}",
+            "sku": "{{ product.variants.first.sku }}",
+            "brand": { "@type": "Brand", "name": "Bubbles Pet" },
+            "offers": {
+              "@type": "Offer",
+              "url": "{{ shop.url }}{{ product.url }}",
+              "priceCurrency": "{{ shop.currency }}",
+              "price": "{{ product.price | money_without_currency | replace: ',', '.' }}",
+              "availability": "https://schema.org/InStock"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "87"
+            }
+          })
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Qual a diferença entre o Neutralizador Pineapple e o tradicional?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A principal diferença está na fragrância de abacaxi e na nova fórmula com maior formação de espuma."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Qual a diluição recomendada?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A diluição recomendada é 1 parte de shampoo para 5 partes de água (1:5)."
+                }
+              }
+            ]
+          })
+        }}
+      />
+
       <style dangerouslySetInnerHTML={{
         __html: `
         :root {
@@ -108,6 +163,11 @@ export default function Produto2() {
           --radius-xl: 20px;
         }
 
+        /* CRITICAL CSS: ABOVE THE FOLD */
+        .hero-gallery { min-height: 450px; contain: layout; }
+        .buy-box { contain: content; }
+        header { transform: translateZ(0); will-change: transform; transition: box-shadow 0.3s ease; }
+        
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
@@ -162,6 +222,7 @@ export default function Produto2() {
               height={45} 
               className="h-8 md:h-10 w-auto object-contain"
               referrerPolicy="no-referrer"
+              priority
             />
           </Link>
         </div>
@@ -223,6 +284,7 @@ export default function Produto2() {
                     fill
                     className="object-cover"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                   />
                 </button>
               ))}
@@ -246,6 +308,7 @@ export default function Produto2() {
                 className="object-cover cursor-pointer"
                 onClick={() => setIsFullscreen(true)}
                 referrerPolicy="no-referrer"
+                priority
               />
               
               {/* Expand Icon */}
@@ -270,19 +333,19 @@ export default function Produto2() {
               <h3 className="text-[14px] font-[800] text-black mb-3">Veja mais sobre o produto</h3>
               <div className="flex gap-3">
                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-[#F4CDD4] relative">
-                  <Image src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=400&auto=format&fit=crop" alt="Uso no pet" fill className="object-cover" />
+                  <Image src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=400&auto=format&fit=crop" alt="Uso no pet" fill className="object-cover" loading="lazy" />
                 </div>
                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-[#F4CDD4] relative">
-                  <Image src="https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?q=80&w=400&auto=format&fit=crop" alt="Textura" fill className="object-cover" />
+                  <Image src="https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?q=80&w=400&auto=format&fit=crop" alt="Textura" fill className="object-cover" loading="lazy" />
                 </div>
                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-[#F4CDD4] relative">
-                  <Image src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=400&auto=format&fit=crop" alt="Detalhe" fill className="object-cover" />
+                  <Image src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=400&auto=format&fit=crop" alt="Detalhe" fill className="object-cover" loading="lazy" />
                 </div>
               </div>
             </div>
 
-            <h1 className="text-[20px] md:text-[26px] font-[800] text-[var(--text-dark)] leading-[1.2] mb-2">
-              SHAMPOO PET NEUTRALIZADOR PINEAPPLE ESSENTIAL 5L (1:5)
+            <h1 className="text-[20px] md:text-[26px] font-[800] text-[var(--text-dark)] leading-[1.2] mb-2 uppercase">
+              {"{{ product.title }}"}
             </h1>
             
             <div className="flex items-center gap-2 mb-6">
@@ -307,15 +370,15 @@ export default function Produto2() {
 
             <div className="mb-2 flex items-baseline gap-3 flex-wrap">
               <span className="text-[40px] font-[600] text-black leading-none tracking-tighter">
-                R$ {(206.90 * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                {"{{ product.price | money }}"}
               </span>
               <span className="text-[15px] text-gray-400 line-through font-medium">
-                R$ {(229.90 * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                {"{{ product.compare_at_price | money }}"}
               </span>
             </div>
 
             <div className="mb-6">
-              <span className="text-[13px] text-gray-500 font-medium">6x de R$ {((206.90 * quantity) / 6).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} sem juros</span>
+              <span className="text-[13px] text-gray-500 font-medium">6x de {"{{ product.price | divided_by: 6 | money }}"} sem juros</span>
             </div>
             
             <div className="flex items-center gap-1 text-[14px] text-[#666] mb-6 font-medium">
@@ -914,6 +977,7 @@ export default function Produto2() {
                         fill 
                         className="object-cover"
                         referrerPolicy="no-referrer"
+                        loading="lazy"
                       />
                       <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
                         <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/30 group-hover/video:scale-110 transition-transform">
@@ -935,7 +999,7 @@ export default function Produto2() {
                     {/* Product Info Box - Tolstoy Style */}
                     <div className="mt-4 w-[95%] bg-white rounded-xl border border-gray-200 shadow-xl p-3 flex items-center gap-3">
                       <div className="w-14 h-14 relative flex-shrink-0 rounded-lg overflow-hidden border border-gray-50">
-                        <Image src={item.productImg} alt="Prod" fill className="object-contain p-1" />
+                        <Image src={item.productImg} alt="Prod" fill className="object-contain p-1" loading="lazy" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-[10px] font-black text-black leading-tight mb-1 line-clamp-2 uppercase tracking-tighter">
@@ -1173,6 +1237,7 @@ export default function Produto2() {
               fill
               className="object-contain"
               referrerPolicy="no-referrer"
+              loading="lazy"
             />
           </div>
 
@@ -1191,13 +1256,13 @@ export default function Produto2() {
       >
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-md overflow-hidden relative border border-gray-100 hidden sm:block">
-            <Image src={images[0].url} alt="Produto" fill className="object-cover" />
+            <Image src={images[0].url} alt="Produto" fill className="object-cover" loading="lazy" />
           </div>
           <div className="flex flex-col">
             <span className="text-[12px] font-[700] text-[var(--text-dark)] line-clamp-1">Shampoo Pineapple Essential 5L</span>
             <div className="flex items-center gap-2">
-              <span className="text-[18px] font-[900] text-black leading-none">R$ 206,90</span>
-              <span className="text-[10px] text-[#666] bg-gray-100 px-2 py-0.5 rounded-full flex items-center gap-1"><CashbackIcon className="w-3 h-3" /> +R$ 10,34 cashback</span>
+              <span className="text-[18px] font-[900] text-black leading-none">{"{{ product.price | money }}"}</span>
+              <span className="text-[10px] text-[#666] bg-gray-100 px-2 py-0.5 rounded-full flex items-center gap-1"><CashbackIcon className="w-3 h-3" /> +{"{{ product.price | times: 0.05 | money }}"} cashback</span>
             </div>
           </div>
         </div>
