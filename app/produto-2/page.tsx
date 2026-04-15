@@ -95,16 +95,16 @@ export default function Produto2() {
           __html: JSON.stringify({
             "@context": "https://schema.org/",
             "@type": "Product",
-            "name": "{{ product.title }}",
-            "image": ["{{ product.featured_image | img_url: '1024x1024' }}"],
-            "description": "{{ product.description | strip_html | truncate: 160 }}",
-            "sku": "{{ product.variants.first.sku }}",
+            "name": "Shampoo Pet Neutralizador Pineapple 5L",
+            "image": ["https://cdn.shopify.com/s/files/1/0627/3322/1999/files/shampoo-pet-neutralizador-pineapple-essential-5l-1-5-388220.jpg"],
+            "description": "Shampoo profissional com tecnologia Deoplex Clear para neutralização de odores.",
+            "sku": "BUB-PINE-5L",
             "brand": { "@type": "Brand", "name": "Bubbles Pet" },
             "offers": {
               "@type": "Offer",
-              "url": "{{ shop.url }}{{ product.url }}",
-              "priceCurrency": "{{ shop.currency }}",
-              "price": "{{ product.price | money_without_currency | replace: ',', '.' }}",
+              "url": "https://bubblespet.com.br/products/shampoo-pineapple",
+              "priceCurrency": "BRL",
+              "price": "206.90",
               "availability": "https://schema.org/InStock"
             },
             "aggregateRating": {
@@ -345,7 +345,7 @@ export default function Produto2() {
             </div>
 
             <h1 className="text-[20px] md:text-[26px] font-[800] text-[var(--text-dark)] leading-[1.2] mb-2 uppercase">
-              {"{{ product.title }}"}
+              Shampoo Pet Neutralizador Pineapple Essential 5L (1:5)
             </h1>
             
             <div className="flex items-center gap-2 mb-6">
@@ -370,15 +370,15 @@ export default function Produto2() {
 
             <div className="mb-2 flex items-baseline gap-3 flex-wrap">
               <span className="text-[40px] font-[600] text-black leading-none tracking-tighter">
-                {"{{ product.price | money }}"}
+                R$ {(206.90 * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
               <span className="text-[15px] text-gray-400 line-through font-medium">
-                {"{{ product.compare_at_price | money }}"}
+                R$ {(229.90 * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
             </div>
 
             <div className="mb-6">
-              <span className="text-[13px] text-gray-500 font-medium">6x de {"{{ product.price | divided_by: 6 | money }}"} sem juros</span>
+              <span className="text-[13px] text-gray-500 font-medium">6x de R$ {((206.90 * quantity) / 6).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} sem juros</span>
             </div>
             
             <div className="flex items-center gap-1 text-[14px] text-[#666] mb-6 font-medium">
@@ -1261,8 +1261,8 @@ export default function Produto2() {
           <div className="flex flex-col">
             <span className="text-[12px] font-[700] text-[var(--text-dark)] line-clamp-1">Shampoo Pineapple Essential 5L</span>
             <div className="flex items-center gap-2">
-              <span className="text-[18px] font-[900] text-black leading-none">{"{{ product.price | money }}"}</span>
-              <span className="text-[10px] text-[#666] bg-gray-100 px-2 py-0.5 rounded-full flex items-center gap-1"><CashbackIcon className="w-3 h-3" /> +{"{{ product.price | times: 0.05 | money }}"} cashback</span>
+              <span className="text-[18px] font-[900] text-black leading-none">R$ 206,90</span>
+              <span className="text-[10px] text-[#666] bg-gray-100 px-2 py-0.5 rounded-full flex items-center gap-1"><CashbackIcon className="w-3 h-3" /> +R$ 10,34 cashback</span>
             </div>
           </div>
         </div>
