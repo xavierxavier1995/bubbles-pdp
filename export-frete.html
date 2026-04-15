@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Entrega e Frete | Bubbles® Cosméticos Pet Profissionais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bubbles: {
+                            dark: '#0D0C0D',
+                            pink: '#F4CDD4',
+                            pinkDark: '#F48FB1'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+    </style>
+</head>
+<body class="bg-white text-bubbles-dark font-sans selection:bg-bubbles-pink selection:text-bubbles-dark">
+
+    <main class="max-w-5xl mx-auto px-6 md:px-12 py-16 space-y-24">
+        <!-- Hero Section -->
+        <section class="text-center space-y-6 max-w-3xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bubbles-pink/30 text-bubbles-dark text-sm font-semibold mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+                <span>Logística Inteligente</span>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-bubbles-dark">
+                Política de Entrega e Frete
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+                Na Bubbles, priorizamos a segurança e a agilidade para que o seu
+                banho e tosa nunca fique desabastecido. Contamos com uma logística
+                inteligente para que seus produtos cheguem com segurança, no prazo e
+                prontos para uso.
+            </p>
+        </section>
+
+        <!-- Free Shipping Rules -->
+        <section class="grid md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+            <div class="space-y-6 flex flex-col">
+                <h2 class="text-3xl font-bold tracking-tight">
+                    Frete Grátis por Região
+                </h2>
+                <p class="text-gray-600">
+                    Faça seus pedidos e aproveite nossas condições especiais de frete
+                    grátis. Entregamos em todo o Brasil com as melhores condições.
+                </p>
+
+                <div class="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-bubbles-pink/20">
+                                <th class="py-4 px-6 font-semibold text-bubbles-dark">Região</th>
+                                <th class="py-4 px-6 font-semibold text-bubbles-dark">Frete Grátis</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">Sudeste</td>
+                                <td class="py-4 px-6 text-gray-600 whitespace-nowrap">Acima de <strong>R$399,90</strong></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">Sul</td>
+                                <td class="py-4 px-6 text-gray-600 whitespace-nowrap">Acima de <strong>R$449,90</strong></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">Centro-Oeste</td>
+                                <td class="py-4 px-6 text-gray-600 whitespace-nowrap">Acima de <strong>R$499,90</strong></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">Nordeste</td>
+                                <td class="py-4 px-6 text-gray-600 whitespace-nowrap">Acima de <strong>R$799,90</strong></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-6 font-medium">Norte</td>
+                                <td class="py-4 px-6 text-gray-600 whitespace-nowrap">Acima de <strong>R$899,90</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 p-3 bg-gray-50 rounded-xl border border-gray-100 text-xs text-gray-600 leading-relaxed mt-auto">
+                    <strong>Importante:</strong> O pedido pode levar até 3 dias úteis
+                    para ser faturado e despachado. Após essa etapa, o prazo de
+                    entrega até o seu banho e tosa varia conforme a transportadora
+                    definida pela nossa parceira logística, de acordo com a sua
+                    região.
+                </div>
+            </div>
+
+            <div class="relative h-full min-h-[400px] rounded-3xl overflow-hidden bg-gray-100">
+                <img
+                    src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=800&q=80"
+                    alt="Shih Tzu tomando banho"
+                    class="absolute inset-0 w-full h-full object-cover"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-8 left-8 right-8 text-white">
+                    <p class="font-medium text-sm uppercase tracking-wider mb-2 opacity-90 text-bubbles-pink">
+                        Rendimento Garantido
+                    </p>
+                    <p class="text-2xl font-bold leading-tight">
+                        Seu banho e tosa sempre abastecido.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deadlines & Security -->
+        <section class="grid md:grid-cols-2 gap-4 md:gap-8">
+            <div class="bg-bubbles-pink/20 rounded-3xl p-6 md:p-8 mb-6">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-white border border-gray-200 rounded-xl p-3 flex-shrink-0 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-bubbles-dark"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900">
+                        Prazos e Processamento
+                    </h3>
+                </div>
+                <div class="text-left text-gray-600 space-y-4">
+                    <p class="leading-relaxed text-sm md:text-base">
+                        Após a aprovação do pagamento, temos um prazo de
+                        <strong>até 3 dias úteis</strong> para despacho. Utilizamos a
+                        plataforma <strong>Mandaê</strong>, que seleciona a
+                        transportadora mais eficiente e rápida para a sua região.
+                    </p>
+                    <div class="bg-white border border-gray-200 rounded-xl p-4 mt-4 text-sm text-gray-600">
+                        <strong class="text-gray-900">⚠️ IMPORTANTE:</strong> Guarde a embalagem original e
+                        verifique os produtos no recebimento. A caixa é essencial para
+                        trocas.
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-3xl p-6 md:p-8 mb-6">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-white border border-gray-200 rounded-xl p-3 flex-shrink-0 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-bubbles-dark"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2-1 4-2 7-2 2.5 0 4.5 1 6.5 2a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900">
+                        Segurança no Transporte
+                    </h3>
+                </div>
+                <div class="text-left text-gray-600 space-y-4">
+                    <p class="leading-relaxed text-sm md:text-base">
+                        Utilizamos embalagens reforçadas para garantir que seus produtos
+                        cheguem intactos e em perfeitas condições até você. Nossa equipe
+                        de logística acompanha de perto cada etapa do processo, desde a
+                        separação até a entrega final, assegurando que o padrão de
+                        qualidade Bubbles seja mantido em todo o trajeto. Além disso,
+                        monitoramos constantemente os índices de satisfação de entrega
+                        para aprimorar continuamente nossos serviços logísticos.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Communication & Tracking -->
+        <section class="space-y-12">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="text-3xl font-bold tracking-tight">
+                    Comunicação e Rastreamento
+                </h2>
+                <p class="text-gray-600">
+                    Acompanhe cada passo do seu pedido com total transparência.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in-up delay-100 flex flex-col items-center text-center relative pt-12">
+                    <div class="w-12 h-12 rounded-full bg-bubbles-pinkDark/30 flex items-center justify-center text-bubbles-dark shrink-0 absolute -top-6 left-1/2 -translate-x-1/2 shadow-sm border border-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Aprovação</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Notificação via WhatsApp confirmando o pedido aprovado.
+                    </p>
+                </div>
+                <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in-up delay-200 flex flex-col items-center text-center relative pt-12">
+                    <div class="w-12 h-12 rounded-full bg-bubbles-pinkDark/30 flex items-center justify-center text-bubbles-dark shrink-0 absolute -top-6 left-1/2 -translate-x-1/2 shadow-sm border border-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Envio</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Envio de link direto e código de rastreio para seu e-mail e WhatsApp.
+                    </p>
+                </div>
+                <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in-up delay-300 flex flex-col items-center text-center relative pt-12">
+                    <div class="w-12 h-12 rounded-full bg-bubbles-pinkDark/30 flex items-center justify-center text-bubbles-dark shrink-0 absolute -top-6 left-1/2 -translate-x-1/2 shadow-sm border border-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Transparência no Rastreio</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Insira o código no link enviado para verificar a movimentação em tempo real.
+                    </p>
+                </div>
+                <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in-up delay-400 flex flex-col items-center text-center relative pt-12">
+                    <div class="w-12 h-12 rounded-full bg-bubbles-pinkDark/30 flex items-center justify-center text-bubbles-dark shrink-0 absolute -top-6 left-1/2 -translate-x-1/2 shadow-sm border border-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Tentativas</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Padrão de até 3 tentativas de entrega antes do retorno à fábrica.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Novas Seções Estratégicas B2B -->
+        <section class="space-y-12 pt-12 border-t border-gray-100">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="text-3xl font-bold tracking-tight">
+                    Compromisso com o seu Banho e Tosa
+                </h2>
+                <p class="text-gray-600">
+                    Entendemos que a sua agenda não pode parar. Veja como garantimos a
+                    segurança do seu estoque.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Logística de Produtos -->
+                <div class="bg-red-50 border border-red-200 rounded-3xl p-6 md:p-8 mb-6">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-white border border-gray-200 rounded-xl p-3 flex-shrink-0 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">
+                            Logística de Produtos
+                        </h3>
+                    </div>
+                    <div class="text-left text-red-700 space-y-4">
+                        <p class="leading-relaxed">
+                            Sabemos que os produtos pesam cerca de 5,2 kg e exigem cuidado
+                            redobrado. Desenvolvemos uma inteligência de cubagem e
+                            embalagem para que os produtos das linhas Ego / Pro, Basiq,
+                            Sensorial e Collora não sofram avarias no transporte:
+                        </p>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5 shrink-0"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                                <span>
+                                    <strong>Caixas Reforçadas:</strong> Papelão de alta
+                                    gramatura que suporta empilhamento.
+                                </span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5 shrink-0"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                                <span>
+                                    <strong>Travas de Segurança:</strong> Tampas com lacre
+                                    industrial e fitas de contenção.
+                                </span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5 shrink-0"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                                <span>
+                                    <strong>Acomodação Milimétrica:</strong> Evita atrito
+                                    interno durante o trajeto.
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Como Receber seu Pedido -->
+                <div class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 mb-6">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-white border border-gray-200 rounded-xl p-3 flex-shrink-0 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900">
+                            Como Receber seu Pedido
+                        </h3>
+                    </div>
+                    <div class="text-left text-gray-600 space-y-4">
+                        <p class="leading-relaxed">
+                            Para garantir a integridade do seu produto, siga este rigoroso
+                            protocolo de conferência no ato da entrega:
+                        </p>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5 shrink-0"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                                <span>
+                                    <strong>Verifique a caixa:</strong> Está seca e sem
+                                    amassados profundos?
+                                </span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5 shrink-0"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                                <span>
+                                    <strong>Confira o lacre:</strong> A fita externa está
+                                    intacta e sem violação?
+                                </span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-600 mt-0.5 shrink-0"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                                <span>
+                                    <strong>Ação Imediata:</strong> Se a caixa estiver
+                                    <strong>
+                                        molhada, amassada ou violada, RECUSE O RECEBIMENTO
+                                    </strong>
+                                    . Anote o motivo no verso da nota fiscal e avise nosso
+                                    suporte para agilizarmos o reenvio.
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transparência no Rastreio -->
+        <section class="space-y-8 pt-12 border-t border-gray-100">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="text-3xl font-bold tracking-tight">
+                    Transparência no Rastreio
+                </h2>
+                <p class="text-gray-600">
+                    Acompanhe seu pedido em tempo real e tenha mais tranquilidade.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-3 md:gap-6">
+                <div class="bg-white border border-gray-100 rounded-2xl p-6 pt-12 shadow-sm relative flex flex-col items-center text-center">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center border-4 border-white shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Código de Rastreio</h3>
+                    <div class="text-sm text-gray-600 leading-relaxed">
+                        Assim que o seu pedido for enviado, você receberá o código de
+                        rastreamento e o link de acompanhamento diretamente no seu
+                        e-mail cadastrado e também através do WhatsApp.
+                    </div>
+                </div>
+                <div class="bg-white border border-gray-100 rounded-2xl p-6 pt-12 shadow-sm relative flex flex-col items-center text-center">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center border-4 border-white shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Suporte Parceiro</h3>
+                    <div class="text-sm text-gray-600 leading-relaxed">
+                        Nossa equipe de
+                        <a
+                            href="https://wa.me/5511913612053?text=Preciso%20de%20ajuda%20a%20respeito%20do%20rastreio"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="font-bold underline hover:text-bubbles-pinkDark transition-colors"
+                        >
+                            Customer Experience
+                        </a>
+                        atua em conjunto com os parceiros logísticos para garantir a
+                        entrega.
+                    </div>
+                </div>
+                <div class="bg-white border border-gray-100 rounded-2xl p-6 pt-12 shadow-sm relative flex flex-col items-center text-center">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center border-4 border-white shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Atualizações de Status</h3>
+                    <div class="text-sm text-gray-600 leading-relaxed">
+                        Você pode acompanhar cada etapa do seu pedido em tempo real
+                        diretamente através do link de rastreio da transportadora.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Frete e Entrega -->
+        <section class="relative py-20 px-6 md:px-12 bg-[linear-gradient(135deg,#F48FA1_0%,#F4CDD4_50%,#FFFFFF_100%)] overflow-hidden rounded-3xl">
+            <!-- Decorative Blobs -->
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#ffcce6] mix-blend-multiply filter blur-[100px] opacity-40 animate-blob"></div>
+                <div class="absolute top-[20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#cce0ff] mix-blend-multiply filter blur-[100px] opacity-40 animate-blob animation-delay-2000"></div>
+                <div class="absolute bottom-[-20%] left-[20%] w-[60%] h-[60%] rounded-full bg-[#e6ccff] mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-4000"></div>
+            </div>
+
+            <div class="relative z-10 text-center max-w-2xl mx-auto space-y-4 mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-[#1A1A1A]">
+                    Dúvidas Frequentes sobre Frete e Entrega
+                </h2>
+            </div>
+
+            <div class="relative z-10 max-w-3xl mx-auto space-y-3">
+                <details open class="group rounded-2xl transition-all duration-300 overflow-hidden backdrop-blur-sm border bg-white/40 border-transparent hover:bg-white/60 open:bg-white open:shadow-sm open:border-white/50 [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="w-full text-left px-6 py-5 flex items-center justify-between gap-6 cursor-pointer focus:outline-none">
+                        <h3 class="text-[15px] leading-snug transition-colors pr-4 text-gray-700 font-medium group-open:text-[#1A1A1A] group-open:font-bold">
+                            Qual o prazo de entrega para a minha região?
+                        </h3>
+                        <div class="shrink-0 flex items-center justify-center transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-open:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#1A1A1A] hidden group-open:block"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </div>
+                    </summary>
+                    <div class="px-6 pb-6 text-[15px] leading-relaxed text-gray-600">
+                        O prazo varia de acordo com o seu CEP. Você pode simular o prazo
+                        exato na calculadora de frete disponível no carrinho de compras
+                        ou no final desta página.
+                    </div>
+                </details>
+
+                <details class="group rounded-2xl transition-all duration-300 overflow-hidden backdrop-blur-sm border bg-white/40 border-transparent hover:bg-white/60 open:bg-white open:shadow-sm open:border-white/50 [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="w-full text-left px-6 py-5 flex items-center justify-between gap-6 cursor-pointer focus:outline-none">
+                        <h3 class="text-[15px] leading-snug transition-colors pr-4 text-gray-700 font-medium group-open:text-[#1A1A1A] group-open:font-bold">
+                            Como faço para rastrear meu pedido?
+                        </h3>
+                        <div class="shrink-0 flex items-center justify-center transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-open:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#1A1A1A] hidden group-open:block"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </div>
+                    </summary>
+                    <div class="px-6 pb-6 text-[15px] leading-relaxed text-gray-600">
+                        Assim que o pedido for despachado, você receberá um link e o
+                        código de rastreamento por e-mail e WhatsApp para acompanhar a
+                        entrega em tempo real.
+                    </div>
+                </details>
+
+                <details class="group rounded-2xl transition-all duration-300 overflow-hidden backdrop-blur-sm border bg-white/40 border-transparent hover:bg-white/60 open:bg-white open:shadow-sm open:border-white/50 [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="w-full text-left px-6 py-5 flex items-center justify-between gap-6 cursor-pointer focus:outline-none">
+                        <h3 class="text-[15px] leading-snug transition-colors pr-4 text-gray-700 font-medium group-open:text-[#1A1A1A] group-open:font-bold">
+                            A Bubbles oferece frete grátis?
+                        </h3>
+                        <div class="shrink-0 flex items-center justify-center transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-open:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#1A1A1A] hidden group-open:block"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </div>
+                    </summary>
+                    <div class="px-6 pb-6 text-[15px] leading-relaxed text-gray-600">
+                        Sim! Oferecemos frete grátis para todo o Brasil com valores
+                        mínimos de compra que variam por região. Para mais detalhes e
+                        para acompanhar sua entrega, acesse nossa
+                        <a href="/rastreio" class="font-bold underline hover:text-bubbles-pink transition-colors">página de rastreamento</a>.
+                    </div>
+                </details>
+
+                <details class="group rounded-2xl transition-all duration-300 overflow-hidden backdrop-blur-sm border bg-white/40 border-transparent hover:bg-white/60 open:bg-white open:shadow-sm open:border-white/50 [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="w-full text-left px-6 py-5 flex items-center justify-between gap-6 cursor-pointer focus:outline-none">
+                        <h3 class="text-[15px] leading-snug transition-colors pr-4 text-gray-700 font-medium group-open:text-[#1A1A1A] group-open:font-bold">
+                            O que acontece se eu não estiver no pet shop no momento da entrega?
+                        </h3>
+                        <div class="shrink-0 flex items-center justify-center transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-open:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#1A1A1A] hidden group-open:block"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </div>
+                    </summary>
+                    <div class="px-6 pb-6 text-[15px] leading-relaxed text-gray-600">
+                        Nossas transportadoras realizam até 3 tentativas de entrega.
+                        Caso não haja ninguém para receber, o pedido retornará à nossa
+                        fábrica e entraremos em contato.
+                    </div>
+                </details>
+
+                <details class="group rounded-2xl transition-all duration-300 overflow-hidden backdrop-blur-sm border bg-white/40 border-transparent hover:bg-white/60 open:bg-white open:shadow-sm open:border-white/50 [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="w-full text-left px-6 py-5 flex items-center justify-between gap-6 cursor-pointer focus:outline-none">
+                        <h3 class="text-[15px] leading-snug transition-colors pr-4 text-gray-700 font-medium group-open:text-[#1A1A1A] group-open:font-bold">
+                            Posso alterar o endereço de entrega após fechar o pedido?
+                        </h3>
+                        <div class="shrink-0 flex items-center justify-center transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-open:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#1A1A1A] hidden group-open:block"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </div>
+                    </summary>
+                    <div class="px-6 pb-6 text-[15px] leading-relaxed text-gray-600">
+                        Caso precise alterar o endereço, entre em contato com nosso
+                        suporte técnico humanizado pelo
+                        <a href="https://wa.me/5511913612053?text=Preciso%20alterar%20o%20endere%C3%A7o%20de%20entrega" target="_blank" rel="noopener noreferrer" class="font-bold underline hover:text-bubbles-pinkDark transition-colors">WhatsApp</a>. A alteração pode ser realizada desde que o pedido ainda não
+                        tenha sido faturado.
+                    </div>
+                </details>
+
+                <details class="group rounded-2xl transition-all duration-300 overflow-hidden backdrop-blur-sm border bg-white/40 border-transparent hover:bg-white/60 open:bg-white open:shadow-sm open:border-white/50 [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="w-full text-left px-6 py-5 flex items-center justify-between gap-6 cursor-pointer focus:outline-none">
+                        <h3 class="text-[15px] leading-snug transition-colors pr-4 text-gray-700 font-medium group-open:text-[#1A1A1A] group-open:font-bold">
+                            A entrega é feita em finais de semana ou feriados?
+                        </h3>
+                        <div class="shrink-0 flex items-center justify-center transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-open:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#1A1A1A] hidden group-open:block"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </div>
+                    </summary>
+                    <div class="px-6 pb-6 text-[15px] leading-relaxed text-gray-600">
+                        Isso depende da transportadora selecionada e da sua região de
+                        entrega. Para verificar a previsão exata, entre em contato com
+                        seu código de rastreio no nosso
+                        <a href="https://wa.me/5511913612053?text=Gostaria%20de%20saber%20se%20minha%20entrega%20pode%20ocorrer%20no%20final%20de%20semana" target="_blank" rel="noopener noreferrer" class="font-bold underline hover:text-bubbles-pinkDark transition-colors">WhatsApp</a>.
+                    </div>
+                </details>
+
+                <details class="group rounded-2xl transition-all duration-300 overflow-hidden backdrop-blur-sm border bg-white/40 border-transparent hover:bg-white/60 open:bg-white open:shadow-sm open:border-white/50 [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="w-full text-left px-6 py-5 flex items-center justify-between gap-6 cursor-pointer focus:outline-none">
+                        <h3 class="text-[15px] leading-snug transition-colors pr-4 text-gray-700 font-medium group-open:text-[#1A1A1A] group-open:font-bold">
+                            Meu pedido consta como entregue, mas não recebi. O que fazer?
+                        </h3>
+                        <div class="shrink-0 flex items-center justify-center transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-open:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#1A1A1A] hidden group-open:block"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </div>
+                    </summary>
+                    <div class="px-6 pb-6 text-[15px] leading-relaxed text-gray-600">
+                        Verifique primeiro com vizinhos, funcionários ou na portaria.
+                        Caso realmente não encontre, contate nosso suporte via
+                        <a href="https://wa.me/5511913612053?text=Meu%20pedido%20consta%20como%20entregue%20mas%20n%C3%A3o%20recebi" target="_blank" rel="noopener noreferrer" class="font-bold underline hover:text-bubbles-pinkDark transition-colors">WhatsApp</a>
+                        imediatamente.
+                    </div>
+                </details>
+
+                <details class="group rounded-2xl transition-all duration-300 overflow-hidden backdrop-blur-sm border bg-white/40 border-transparent hover:bg-white/60 open:bg-white open:shadow-sm open:border-white/50 [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="w-full text-left px-6 py-5 flex items-center justify-between gap-6 cursor-pointer focus:outline-none">
+                        <h3 class="text-[15px] leading-snug transition-colors pr-4 text-gray-700 font-medium group-open:text-[#1A1A1A] group-open:font-bold">
+                            Posso retirar meu pedido diretamente na fábrica?
+                        </h3>
+                        <div class="shrink-0 flex items-center justify-center transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-open:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#1A1A1A] hidden group-open:block"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </div>
+                    </summary>
+                    <div class="px-6 pb-6 text-[15px] leading-relaxed text-gray-600">
+                        Atualmente nossa operação logística é 100% focada em envios via
+                        transportadora, não possuímos modalidade de retirada presencial
+                        na fábrica.
+                    </div>
+                </details>
+
+                <details class="group rounded-2xl transition-all duration-300 overflow-hidden backdrop-blur-sm border bg-white/40 border-transparent hover:bg-white/60 open:bg-white open:shadow-sm open:border-white/50 [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="w-full text-left px-6 py-5 flex items-center justify-between gap-6 cursor-pointer focus:outline-none">
+                        <h3 class="text-[15px] leading-snug transition-colors pr-4 text-gray-700 font-medium group-open:text-[#1A1A1A] group-open:font-bold">
+                            Ocorreu um atraso na minha entrega. Como proceder?
+                        </h3>
+                        <div class="shrink-0 flex items-center justify-center transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-open:hidden"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#1A1A1A] hidden group-open:block"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </div>
+                    </summary>
+                    <div class="px-6 pb-6 text-[15px] leading-relaxed text-gray-600">
+                        Atrasos são raros, mas podem ocorrer por questões logísticas
+                        externas. Entre em contato com nosso suporte via WhatsApp
+                        informando o número do pedido para acionarmos a transportadora.
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Support Banner -->
+        <section class="bg-gray-50 rounded-3xl p-8 md:p-12 text-center border border-gray-100">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto shadow-sm border border-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-bubbles-dark"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900">
+                    Ainda com dúvidas sobre a Política de Entrega e Frete?
+                </h2>
+                <p class="text-gray-600">
+                    Nossa equipe de especialistas está pronta para ajudar você com
+                    qualquer questão relacionada à Política de Entrega e Frete.
+                </p>
+                <a
+                    href="https://wa.me/5511913612053?text=Olá,%20estou%20na%20página%20Política%20de%20Entrega%20e%20Frete%20e%20preciso%20de%20ajuda"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#20bd5a] transition-colors shadow-sm hover:shadow-md"
+                >
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                    </svg>
+                    Falar com Especialista
+                </a>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

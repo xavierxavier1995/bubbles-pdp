@@ -1,0 +1,207 @@
+[
+  {
+    "id": 1,
+    "name": "BOM PRA CACHORRO DISTRIBUIDORA",
+    "state": "SP",
+    "cities": [
+      "Suzano",
+      "Rio Grande da Serra",
+      "Ribeirão Pires",
+      "Mauá"
+    ],
+    "phone": "11973889683",
+    "instagram": "",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  },
+  {
+    "id": 2,
+    "name": "UNIVERSO TOSADOR DISTRIBUIDORA",
+    "state": "SP",
+    "cities": [
+      "São Paulo",
+      "Guarulhos",
+      "Osasco",
+      "Santo André",
+      "São Bernardo do Campo",
+      "São Caetano do Sul"
+    ],
+    "phone": "11948275444",
+    "instagram": "universodotosador",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  },
+  {
+    "id": 3,
+    "name": "DOG SHOWER DISTRIBUIDORA",
+    "state": "PR",
+    "cities": [
+      "Fazenda Rio Grande",
+      "Campo Largo",
+      "Rio Negro",
+      "Almirante Tamandaré do Sul",
+      "Colombo",
+      "São José dos Pinhais"
+    ],
+    "phone": "4396611413",
+    "instagram": "dog_shower_distribuidora",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  },
+  {
+    "id": 4,
+    "name": "PET SUL DISTRIBUIDORA",
+    "state": "RS",
+    "cities": [
+      "Porto Alegre",
+      "Canoas",
+      "Novo Hamburgo",
+      "São Leopoldo",
+      "Caxias do Sul"
+    ],
+    "phone": "51999998888",
+    "instagram": "petsul_rs",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  },
+  {
+    "id": 5,
+    "name": "CARIOCA PET DISTRIBUIDORA",
+    "state": "RJ",
+    "cities": [
+      "Rio de Janeiro",
+      "Niterói",
+      "São Gonçalo",
+      "Duque de Caxias",
+      "Nova Iguaçu"
+    ],
+    "phone": "21988887777",
+    "instagram": "cariocapet_rj",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  },
+  {
+    "id": 6,
+    "name": "MINAS PET DISTRIBUIÇÃO",
+    "state": "MG",
+    "cities": [
+      "Belo Horizonte",
+      "Contagem",
+      "Betim",
+      "Uberlândia",
+      "Juiz de Fora"
+    ],
+    "phone": "31977776666",
+    "instagram": "minaspet_mg",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  },
+  {
+    "id": 7,
+    "name": "BAHIA PET SUPPLY",
+    "state": "BA",
+    "cities": [
+      "Salvador",
+      "Feira de Santana",
+      "Vitória da Conquista",
+      "Camaçari",
+      "Lauro de Freitas"
+    ],
+    "phone": "71966665555",
+    "instagram": "bahiapet_supply",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  },
+  {
+    "id": 8,
+    "name": "NORDESTE PET DISTRIBUIDORA",
+    "state": "PE",
+    "cities": [
+      "Recife",
+      "Jaboatão dos Guararapes",
+      "Olinda",
+      "Caruaru",
+      "Petrolina"
+    ],
+    "phone": "81955554444",
+    "instagram": "nordestepet_pe",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  },
+  {
+    "id": 9,
+    "name": "CEARÁ PET DISTRIBUIDORA",
+    "state": "CE",
+    "cities": [
+      "Fortaleza",
+      "Caucaia",
+      "Juazeiro do Norte",
+      "Maracanaú",
+      "Sobral"
+    ],
+    "phone": "85944443333",
+    "instagram": "cearapet_ce",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  },
+  {
+    "id": 10,
+    "name": "SANTA CATARINA PET",
+    "state": "SC",
+    "cities": [
+      "Florianópolis",
+      "Joinville",
+      "Blumenau",
+      "São José",
+      "Chapecó"
+    ],
+    "phone": "48933332222",
+    "instagram": "scpet_distribuidora",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  },
+  {
+    "id": 11,
+    "name": "GOIÁS PET DISTRIBUIÇÃO",
+    "state": "GO",
+    "cities": [
+      "Goiânia",
+      "Aparecida de Goiânia",
+      "Anápolis",
+      "Rio Verde",
+      "Luziânia"
+    ],
+    "phone": "62922221111",
+    "instagram": "goiaspet_go",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  },
+  {
+    "id": 12,
+    "name": "AMAZONAS PET SUPPLY",
+    "state": "AM",
+    "cities": [
+      "Manaus",
+      "Parintins",
+      "Itacoatiara",
+      "Manacapuru",
+      "Coari"
+    ],
+    "phone": "92911110000",
+    "instagram": "amazonaspet_am",
+    "site": "",
+    "lat": 0,
+    "lng": 0
+  }
+]

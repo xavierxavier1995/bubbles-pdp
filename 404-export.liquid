@@ -1,0 +1,97 @@
+{% comment %}
+  404 Template Export
+  Requer Tailwind CSS rodando no tema. A fonte Poppins é carregada via CSS nativo.
+{% endcomment %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap');
+  
+  .not-found-container {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Conversão das animações do Framer Motion para CSS Puro */
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+</style>
+
+<div class="h-screen w-full bg-[#0D0C0D] flex flex-col items-center justify-center p-6 text-white overflow-hidden relative not-found-container">
+  
+  <!-- Fundo Estático -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
+    <div class="absolute w-[500px] h-[500px] md:w-[800px] md:h-[800px] bg-[#F4CDD4] rounded-full blur-[200px] opacity-10"></div>
+  </div>
+
+  <div class="relative z-10 w-full max-w-3xl flex flex-col items-center text-center">
+    
+    <!-- Logo Minimalista -->
+    <div class="mb-8 animate-fade-in">
+      <a href="{{ routes.root_url }}" class="hover:opacity-80 transition-opacity">
+        <img 
+          src="https://bubbles.gabrielxavier.online/BUBBLES.svg" 
+          alt="{{ shop.name | escape }}" 
+          class="h-8 md:h-10 invert brightness-0 mx-auto"
+        />
+      </a>
+    </div>
+    
+    <!-- 404 Principal -->
+    <h1 class="text-[120px] sm:text-[160px] md:text-[220px] font-black leading-none mb-2 select-none tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/30 animate-fade-in" style="animation-delay: 0.1s; opacity: 0;">
+      404
+    </h1>
+    
+    <!-- Mensagem Genérica -->
+    <h2 class="text-lg sm:text-xl md:text-2xl font-bold mb-8 text-white/90 uppercase tracking-widest max-w-2xl mx-auto leading-relaxed animate-fade-up" style="animation-delay: 0.2s; opacity: 0;">
+      A página que você está procurando não existe.
+    </h2>
+
+    <!-- Barra de Pesquisa Integrada Shopify -->
+    <div class="w-full flex justify-center mb-10 animate-fade-up" style="animation-delay: 0.3s; opacity: 0;">
+      <form action="{{ routes.search_url }}" method="get" class="relative w-full max-w-lg">
+        <input 
+          type="text" 
+          name="q"
+          placeholder="Pesquise no site..." 
+          class="w-full bg-white/5 border border-white/20 rounded-full px-6 py-4 md:py-5 text-white placeholder-white/40 focus:outline-none focus:border-[#F4CDD4] focus:ring-2 focus:ring-[#F4CDD4]/30 transition-all font-medium pr-16"
+        />
+        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-[#F4CDD4] text-[#0D0C0D] rounded-full flex items-center justify-center hover:bg-white transition-colors">
+          <!-- Ícone Lupa -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 md:w-6 md:h-6"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Botões de Redirecionamento -->
+    <div class="flex flex-col sm:flex-row gap-4 w-full justify-center items-center animate-fade-up" style="animation-delay: 0.4s; opacity: 0;">
+      
+      <a href="{{ routes.root_url }}" class="border border-white/20 text-white hover:bg-white hover:text-[#0D0C0D] rounded-full h-14 md:h-16 font-bold uppercase tracking-widest text-[11px] md:text-[13px] flex items-center justify-center transition-all duration-250 hover:scale-105 w-full sm:w-64">
+        <!-- Ícone Casinha -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-5 md:h-5 mr-3"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        VOLTAR PARA HOME
+      </a>
+      
+      <a href="{{ routes.all_products_collection_url }}" class="bg-[#F4CDD4] text-[#0D0C0D] hover:bg-white rounded-full h-14 md:h-16 font-bold uppercase tracking-widest text-[11px] md:text-[13px] flex items-center justify-center transition-all duration-250 hover:scale-105 shadow-[0_6px_20px_rgba(244,205,212,0.15)] w-full sm:w-64">
+        <!-- Ícone Sacola -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-5 md:h-5 mr-3"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        CONFIRA PRODUTOS
+      </a>
+      
+    </div>
+  </div>
+
+</div>
