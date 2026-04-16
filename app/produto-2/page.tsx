@@ -7,11 +7,39 @@ import { ShoppingCart, Star, Check, ChevronDown, ChevronUp, Plus, Minus, Menu, S
 import { RotateCcw, ShieldCheck, CreditCard, Headset, Clock, Users, Heart as HeartLucide, Package, Star as StarLucide } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const CarouselWrapper = ({ children, carouselRef, hideArrows }: { children: React.ReactNode, carouselRef: React.RefObject<HTMLDivElement | null>, hideArrows?: boolean }) => (
-  <div className="relative overflow-hidden">
-    {children}
-  </div>
-);
+const CarouselWrapper = ({ children, carouselRef, hideArrows }: { children: React.ReactNode, carouselRef: React.RefObject<HTMLDivElement | null>, hideArrows?: boolean }) => {
+  const scroll = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const { scrollLeft, clientWidth } = carouselRef.current;
+      const scrollTo = direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+      carouselRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="relative group">
+      {!hideArrows && (
+        <>
+          <button 
+            onClick={() => scroll('left')}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-30 bg-white/10 backdrop-blur-md border border-white/20 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity hidden md:block"
+            aria-label="Anterior"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button 
+            onClick={() => scroll('right')}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-30 bg-white/10 backdrop-blur-md border border-white/20 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity hidden md:block"
+            aria-label="Próximo"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </>
+      )}
+      {children}
+    </div>
+  );
+};
 
 const CashbackIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -88,58 +116,112 @@ export default function Produto2() {
 
   return (
     <div className="font-poppins text-black bg-white min-h-screen relative pb-20 md:pb-0">
-      {/* SEO & STRUCTURED DATA (LIQUID READY) */}
+      {/* SEO & STRUCTURED DATA (JSON-LD) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": "Shampoo Pet Neutralizador Pineapple 5L",
-            "image": ["https://cdn.shopify.com/s/files/1/0627/3322/1999/files/shampoo-pet-neutralizador-pineapple-essential-5l-1-5-388220.jpg"],
-            "description": "Shampoo profissional com tecnologia Deoplex Clear para neutralização de odores.",
-            "sku": "BUB-PINE-5L",
-            "brand": { "@type": "Brand", "name": "Bubbles Pet" },
-            "offers": {
-              "@type": "Offer",
-              "url": "https://bubblespet.com.br/products/shampoo-pineapple",
-              "priceCurrency": "BRL",
-              "price": "206.90",
-              "availability": "https://schema.org/InStock"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.9",
-              "reviewCount": "87"
-            }
-          })
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Qual a diferença entre o Neutralizador Pineapple e o tradicional?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "A principal diferença está na fragrância de abacaxi e na nova fórmula com maior formação de espuma."
-                }
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org/",
+              "@type": "Product",
+              "name": "Shampoo Pet Neutralizador Pineapple Essential 5L",
+              "image": ["https://www.bubbles.com.br/cdn/shop/files/shampoo-pet-neutralizador-pineapple-essential-5l-15-8086103.jpg"],
+              "description": "Shampoo profissional neutralizador de odores com fragrância tropical de abacaxi e tecnologia Deoplex Clear.",
+              "sku": "BUB-PINE-5L",
+              "mpn": "BUB-PINE-5L",
+              "brand": { "@type": "Brand", "name": "Bubbles Pet" },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://bubblespet.com.br/products/shampoo-pineapple",
+                "priceCurrency": "BRL",
+                "price": "206.90",
+                "priceValidUntil": "2026-12-31",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
               },
-              {
-                "@type": "Question",
-                "name": "Qual a diluição recomendada?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "A diluição recomendada é 1 parte de shampoo para 5 partes de água (1:5)."
-                }
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "87"
               }
-            ]
-          })
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Qual a diferença entre o Neutralizador Pineapple e o tradicional?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A principal diferença está na fragrância e na formulação da edição especial. O Neutralizador Pineapple possui fragrância marcante de abacaxi, além de nova fórmula com maior formação de espuma."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "A diluição é a mesma do Neutralizador Essential?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim. A diluição recomendada é 1 parte de shampoo para 5 partes de água (1:5)."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Pode ser usado em cães e gatos?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim, o produto pode ser utilizado em cães e gatos, respeitando sempre as recomendações de uso."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Posso guardar o produto já diluído?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. Após a diluição, o produto deve ser usado em até 24 horas. O produto concentrado tem validade de 24 meses."
+                  }
+                },
+                {
+                   "@type": "Question",
+                   "name": "Os produtos são testados em animais?",
+                   "acceptedAnswer": {
+                     "@type": "Answer",
+                     "text": "Não! Somos uma marca 100% cruelty-free. Nossos produtos não são testados em animais em nenhuma etapa da produção."
+                   }
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Início",
+                  "item": "https://bubblespet.com.br/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Shampoos",
+                  "item": "https://bubblespet.com.br/collections/shampoos"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Linha Essential",
+                  "item": "https://bubblespet.com.br/collections/essential"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": "Shampoo Neutralizador Pineapple",
+                  "item": "https://bubblespet.com.br/products/shampoo-pineapple"
+                }
+              ]
+            }
+          ])
         }}
       />
 
@@ -217,7 +299,7 @@ export default function Produto2() {
           <Link href="/" className="flex items-center gap-2">
             <Image 
               src="https://www.bubbles.com.br/cdn/shop/files/logo-bubbles.png?v=1754313552&width=165" 
-              alt="Bubbles" 
+              alt="Logo Bubbles Pet - Especialistas em Higiene Animal" 
               width={140} 
               height={45} 
               className="h-8 md:h-10 w-auto object-contain"
@@ -330,7 +412,7 @@ export default function Produto2() {
           <div className="flex flex-col">
 
             <div className="mb-4">
-              <h3 className="text-[14px] font-[800] text-black mb-3">Veja mais sobre o produto</h3>
+              <h3 className="text-[14px] font-[600] text-black mb-3 text-left">Veja mais sobre o produto</h3>
               <div className="flex gap-3">
                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-[#F4CDD4] relative">
                   <Image src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=400&auto=format&fit=crop" alt="Uso no pet" fill className="object-cover" loading="lazy" />
@@ -344,7 +426,7 @@ export default function Produto2() {
               </div>
             </div>
 
-            <h1 className="text-[20px] md:text-[26px] font-[800] text-[var(--text-dark)] leading-[1.2] mb-2 uppercase">
+            <h1 className="text-[20px] md:text-[26px] font-[600] text-[var(--text-dark)] leading-[1.2] mb-2 uppercase text-left">
               Shampoo Pet Neutralizador Pineapple Essential 5L (1:5)
             </h1>
             
@@ -362,14 +444,14 @@ export default function Produto2() {
               </a>
             </div>
 
-            <div className="mb-1">
-              <span className="bg-[var(--green)] text-white text-[12px] font-bold px-3 py-1 rounded-full">
-                10% de desconto
+            <div className="mb-4">
+              <span className="bg-[var(--green)] text-white text-[12px] font-bold px-3 py-1 rounded-full uppercase">
+                40% OFF
               </span>
             </div>
 
             <div className="mb-2 flex items-baseline gap-3 flex-wrap">
-              <span className="text-[40px] font-[600] text-black leading-none tracking-tighter">
+              <span className="text-[32px] md:text-[40px] font-[600] text-black leading-none tracking-tighter">
                 R$ {(206.90 * quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
               <span className="text-[15px] text-gray-400 line-through font-medium">
@@ -377,16 +459,19 @@ export default function Produto2() {
               </span>
             </div>
 
-            <div className="mb-6">
+            <div className="mb-2 md:mb-6">
               <span className="text-[13px] text-gray-500 font-medium">6x de R$ {((206.90 * quantity) / 6).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} sem juros</span>
             </div>
             
-            <div className="flex items-center gap-1 text-[14px] text-[#666] mb-6 font-medium">
-              <CashbackIcon className="w-4 h-4 text-[#666]" />
-              <span>Ganhe <strong className="text-black">R$ {((206.90 * quantity) * 0.05).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong> de cashback</span>
+            <div className="flex items-center justify-between text-[11px] md:text-[14px] text-[#666] mb-1 md:mb-6 font-medium bg-gray-50/50 px-1 py-1.5 rounded-lg md:bg-transparent md:p-0 whitespace-nowrap overflow-hidden">
+              <div className="flex items-center gap-1">
+                <CashbackIcon className="w-4 h-4 text-[#666]" />
+                <span>Ganhe <strong className="text-black font-semibold">R$ {((206.90 * quantity) * 0.05).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></span>
+              </div>
+              <span className="text-[9px] md:hidden px-0.5 py-0.5 bg-[var(--pink-light)] text-[var(--text-dark)] rounded font-black tracking-tighter shrink-0 ml-1">CASHBACK</span>
             </div>
 
-            <div className="grid grid-cols-3 gap-0 border border-gray-200 rounded-[10px] bg-[#f7f7f7] mb-8">
+            <div className="grid grid-cols-3 gap-0 border border-gray-200 rounded-[10px] bg-[#f7f7f7] mb-4 md:mb-4 order-3">
               <div className="p-4 text-center border-r border-gray-200">
                 <span className="block text-[10px] text-gray-400 uppercase font-medium tracking-widest mb-1">Rendimento</span>
                 <span className="block text-[15px] font-medium text-black">300 banhos</span>
@@ -402,8 +487,8 @@ export default function Produto2() {
             </div>
 
             {/* BLOCO: GARANTIAS (REFINED) */}
-            <div className="p-6 mb-8 border-b border-gray-200">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
+            <div className="py-4 md:py-6 mb-4 md:mb-8 border-b border-gray-200 order-5 md:order-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                 <div className="flex flex-col items-center text-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-[#fdf2f4] flex items-center justify-center">
                     <RotateCcw className="w-5 h-5 text-black" strokeWidth={1.5} />
@@ -445,8 +530,8 @@ export default function Produto2() {
 
 
             {/* QUANTITY AND ADD TO CART - SIDE BY SIDE */}
-            <div className="mb-4">
-              <p className="font-[700] text-[12px] mb-2 text-[var(--text-dark)]">Quantidade:</p>
+            <div className="mb-4 order-4 md:order-5">
+              <p className="font-[700] text-[12px] text-[var(--text-dark)] uppercase mb-2">QUANTIDADE:</p>
               <div className="flex flex-col gap-3">
                 <div className="flex gap-3">
                   <div className="flex items-center border border-[#E0E0E0] rounded-[var(--radius-md)] h-[52px] bg-white w-[120px] flex-shrink-0">
@@ -467,14 +552,14 @@ export default function Produto2() {
 
                   <button 
                     ref={addToCartRef}
-                    className="flex-1 h-[52px] bg-[#25D366] hover:bg-[#1DA851] text-white font-semibold text-[18px] uppercase tracking-wide rounded-[10px] flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_20px_rgba(37,211,102,0.4)] active:scale-[0.98]"
+                    className="flex-1 h-[52px] bg-[#25D366] hover:bg-[#1DA851] text-white font-semibold text-[16px] md:text-[18px] uppercase tracking-wide rounded-[10px] flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]"
                   >
                     Comprar
                   </button>
                 </div>
                 
                 {(206.90 * quantity) > 399.00 && (
-                  <div className="bg-gradient-to-r from-[var(--pink)] to-[#ff8da1] text-white p-1 md:p-3 rounded-[var(--radius-md)] flex items-center gap-1.5 md:gap-3 shadow-[0_4px_15px_rgba(244,143,161,0.4)] animate-pulse border border-[#ffb3c1]">
+                  <div className="bg-gradient-to-r from-[#ff8da1] to-[var(--pink)] text-white p-1 md:p-3 rounded-[var(--radius-md)] flex items-center gap-1.5 md:gap-3 shadow-[0_4px_15px_rgba(244,143,161,0.4)] animate-pulse border border-[#ffb3c1]">
                     <Gift className="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <span className="block font-bold text-[10px] sm:text-[11px] md:text-[14px] uppercase tracking-wide truncate">Brinde Grátis Desbloqueado!</span>
@@ -487,9 +572,9 @@ export default function Produto2() {
 
 
             {/* SHIPPING CALCULATOR (MINIMALIST) */}
-            <div className="border-b border-gray-200 p-6 mb-6">
-              <h4 className="text-[11px] font-black text-black uppercase tracking-widest mb-4 flex items-center gap-2">
-                <Truck className="w-4 h-4 text-[var(--pink)]" /> Frete e Prazo
+            <div className="p-0 mb-4 md:mb-6 order-6">
+              <h4 className="font-[700] text-[12px] text-[var(--text-dark)] uppercase mb-2 flex items-center gap-2">
+                Frete e Prazo <Truck className="w-4 h-4 text-[var(--pink)]" />
               </h4>
               <form onSubmit={handleCalculateShipping} className="flex gap-2">
                 <div className="relative flex-1">
@@ -498,7 +583,7 @@ export default function Produto2() {
                     placeholder="Informe seu CEP" 
                     value={cep}
                     onChange={(e) => setCep(e.target.value.replace(/\D/g, '').slice(0, 8))}
-                    className="w-full h-[48px] px-4 bg-gray-50 border-none rounded-xl text-[14px] font-semibold focus:ring-2 focus:ring-[var(--pink)]/20 transition-all outline-none"
+                    className="w-full h-[48px] px-4 bg-gray-50 border-none rounded-[10px] text-[14px] font-semibold focus:ring-2 focus:ring-[var(--pink)]/20 transition-all outline-none"
                   />
                 </div>
                 <button 
@@ -522,7 +607,7 @@ export default function Produto2() {
               )}
             </div>
 
-            <div className="flex justify-between items-center pt-6 border-t border-[var(--border)] gap-2">
+            <div className="flex justify-between items-center pt-6 border-t border-[var(--border)] gap-2 order-7">
               {[
                 { id: 'premium', text: 'linha premium', icon: Star },
                 { id: 'veganos', text: '100% veganos', icon: Feather },
@@ -571,7 +656,7 @@ export default function Produto2() {
                       <item.icon size={20} strokeWidth={2} />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-[16px] text-black uppercase tracking-tight mb-1">{item.title}</h3>
+                      <h4 className="font-semibold text-[16px] text-black uppercase tracking-tight mb-1">{item.title}</h4>
                       <p className="text-[13px] text-gray-400 font-medium leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
@@ -597,14 +682,14 @@ export default function Produto2() {
                 className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors"
               >
                 <span className="font-bold text-[15px] text-[var(--text-dark)] flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-[#999]" /> Descrição
+                  <FileText className="w-4 h-4 text-[#999]" aria-hidden="true" /> Descrição
                 </span>
                 {openAccordion === 1 ? <ChevronUp className="w-5 h-5 text-[var(--text-mid)]" /> : <ChevronDown className="w-5 h-5 text-[var(--text-mid)]" />}
               </button>
               {openAccordion === 1 && (
                 <div className="px-6 pb-6 pt-2 text-[14px] text-[var(--text-mid)] leading-relaxed space-y-4">
-                  <p><strong className="text-black font-bold">O Shampoo Neutralizador Pineapple Essential</strong> é uma edição especial da linha Essential, desenvolvido para proporcionar <strong className="text-black font-bold">limpeza eficiente da pelagem</strong> enquanto auxilia na <strong className="text-black font-bold">redução dos odores indesejados</strong>.</p>
-                  <p>Sua fórmula atua diretamente nas principais fontes de mau cheiro, como umidade, sebo e sujeira, ajudando a <strong className="text-black font-bold">neutralizar odores sem apenas mascará-los</strong>. Com nova fórmula, oferece <strong className="text-black font-bold">maior formação de espuma</strong>, facilitando a distribuição do produto na pelagem e proporcionando um banho mais prático e confortável para o profissional.</p>
+                  <p><strong className="font-[600]">O Shampoo Neutralizador Pineapple Essential</strong> é uma edição especial da linha Essential, desenvolvido para proporcionar <strong className="font-[600]">limpeza eficiente da pelagem</strong> enquanto auxilia na <strong className="font-[600]">redução dos odores indesejados</strong>.</p>
+                  <p>Sua fórmula atua diretamente nas principais fontes de mau cheiro, como umidade, sebo e sujeira, ajudando a <strong className="font-[600]">neutralizar odores sem apenas mascará-los</strong>. Com nova fórmula, oferece <strong className="font-[600]">maior formação de espuma</strong>, facilitando a distribuição do produto na pelagem e proporcionando um banho mais prático e confortável para o profissional.</p>
                   <p>Sua fragrância Pineapple (abacaxi) traz uma experiência olfativa marcante e refrescante, deixando os pets perfumados por mais tempo e transformando o banho em um momento ainda mais agradável.</p>
                   <p>Ideal para uso na rotina de banho e tosa, promove limpeza eficiente, sensação de frescor e pelagem macia, com o diferencial de uma fragrância tropical exclusiva desta edição especial.</p>
                 </div>
@@ -618,18 +703,18 @@ export default function Produto2() {
                 className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors"
               >
                 <span className="font-bold text-[15px] text-[var(--text-dark)] flex items-center gap-2">
-                  <Star className="w-4 h-4 text-[#999]" /> Benefícios
+                  <Star className="w-4 h-4 text-[#999]" aria-hidden="true" /> Benefícios
                 </span>
                 {openAccordion === 2 ? <ChevronUp className="w-5 h-5 text-[var(--text-mid)]" /> : <ChevronDown className="w-5 h-5 text-[var(--text-mid)]" />}
               </button>
               {openAccordion === 2 && (
                 <div className="px-6 pb-6 pt-2 text-[14px] text-[var(--text-mid)] leading-relaxed">
                   <ul className="space-y-2">
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> <strong className="text-black font-bold">Neutraliza odores</strong> da pelagem, atuando nas principais fontes de mau cheiro</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> <strong className="text-black font-bold">Nova fórmula com maior formação de espuma</strong>, facilitando o banho</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> <strong className="text-black font-bold">Fragrância marcante de abacaxi</strong> (Pineapple), com sensação tropical</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> Limpeza eficiente <strong className="text-black font-bold">sem agredir a pele e os pelos</strong></li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> Deixa a pelagem <strong className="text-black font-bold">macia, leve e perfumada</strong> por mais tempo</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> <strong className="font-[600]">Neutraliza odores</strong> da pelagem, atuando nas principais fontes de mau cheiro</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> <strong className="font-[600]">Nova fórmula com maior formação de espuma</strong>, facilitando o banho</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> <strong className="font-[600]">Fragrância marcante de abacaxi</strong> (Pineapple), com sensação tropical</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> Limpeza eficiente <strong className="font-[600]">sem agredir a pele e os pelos</strong></li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> Deixa a pelagem <strong className="font-[600]">macia, leve e perfumada</strong> por mais tempo</li>
                   </ul>
                 </div>
               )}
@@ -648,7 +733,7 @@ export default function Produto2() {
               </button>
               {openAccordion === 3 && (
                 <div className="px-6 pb-6 pt-2 text-[14px] text-[var(--text-mid)] leading-relaxed">
-                  <p><strong className="text-black font-bold">Dilua uma porção de shampoo para cinco porções de água</strong>, misturando com movimentos circulares até a diluição total. Com um frasco diluidor, aplique o produto e, com as mãos, <strong className="text-black font-bold">massageie os pelos até formar uma rica espuma</strong>. Após a limpeza, remova totalmente a espuma dos pelos.</p>
+                  <p><strong className="font-[600]">Dilua uma porção de shampoo para cinco porções de água</strong>, misturando com movimentos circulares até a diluição total. Com um frasco diluidor, aplique o produto e, com as mãos, <strong className="font-[600]">massageie os pelos até formar uma rica espuma</strong>. Após a limpeza, remova totalmente a espuma dos pelos.</p>
                 </div>
               )}
             </div>
@@ -1034,8 +1119,8 @@ export default function Produto2() {
         {/* BLOCO: VISTOS RECENTEMENTE */}
         <section className="py-12 px-4 bg-white">
           <div className="max-w-[1200px] mx-auto">
-            <h2 className="text-[18px] md:text-[20px] font-semibold text-[var(--text-dark)] mb-6 flex items-center gap-2 uppercase tracking-tight">
-              <RefreshCcw className="w-4 h-4 text-[var(--pink)]" /> Vistos recentemente
+            <h2 className="text-[18px] md:text-[20px] font-semibold text-[var(--text-dark)] mb-6 uppercase tracking-tight">
+              Vistos recentemente
             </h2>
             <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
               {[
@@ -1076,7 +1161,7 @@ export default function Produto2() {
               <motion.span 
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="text-[#F4CDD4] text-[10px] font-black uppercase tracking-[0.4em] mb-3 block"
+                className="text-[#F4CDD4] text-[10px] font-semibold uppercase tracking-[0.4em] mb-3 block"
               >
                 Nossa Essência
               </motion.span>
@@ -1104,8 +1189,8 @@ export default function Produto2() {
               </motion.div>
             </div>
 
-            <CarouselWrapper carouselRef={statsCarouselRef} hideArrows={true}>
-              <div className="flex gap-4 overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar lg:grid lg:grid-cols-5 lg:gap-3" ref={statsCarouselRef}>
+            <CarouselWrapper carouselRef={statsCarouselRef} hideArrows={false}>
+              <div className="flex gap-4 overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar touch-pan-x lg:grid lg:grid-cols-5 lg:gap-3" ref={statsCarouselRef}>
                 {[
                   { label: "Tempo de Mercado", val: "+7 Anos", icon: Clock, desc: "Pioneirismo e Inovação" },
                   { label: "NPS e Satisfação", val: "4.9/5.0", icon: StarLucide, desc: "Aprovação Máxima" },
@@ -1136,7 +1221,7 @@ export default function Produto2() {
 
         {/* BLOCO 13: FAQ */}
         <section className="bg-white max-w-[800px] mx-auto px-4 py-16">
-          <h2 className="text-center text-[24px] md:text-[28px] font-[800] text-[var(--text-dark)] mb-8">
+          <h2 className="text-center text-[24px] md:text-[28px] font-semibold text-[var(--text-dark)] mb-8">
             Perguntas frequentes
           </h2>
           
@@ -1194,9 +1279,11 @@ export default function Produto2() {
               <div key={idx} className="border border-[var(--border)] rounded-[var(--radius-md)] overflow-hidden bg-white">
                 <button 
                   onClick={() => toggleFaq(idx)}
+                  aria-expanded={openFaq === idx}
+                  aria-label={`Ver resposta para: ${faq.q}`}
                   className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors text-left"
                 >
-                  <span className="font-bold text-[15px] text-[var(--text-dark)] pr-4">
+                  <span className="font-semibold text-[15px] text-[var(--text-dark)] pr-4">
                     {faq.q}
                   </span>
                   {openFaq === idx ? <ChevronUp className="w-5 h-5 text-[var(--pink)] flex-shrink-0" /> : <ChevronDown className="w-5 h-5 text-[var(--text-mid)] flex-shrink-0" />}
@@ -1256,18 +1343,19 @@ export default function Produto2() {
       >
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-md overflow-hidden relative border border-gray-100 hidden sm:block">
-            <Image src={images[0].url} alt="Produto" fill className="object-cover" loading="lazy" />
+            <Image src={images[0].url} alt="Miniatura do Shampoo Pineapple Essential 5L" fill className="object-cover" loading="lazy" />
           </div>
           <div className="flex flex-col">
-            <span className="text-[12px] font-[700] text-[var(--text-dark)] line-clamp-1">Shampoo Pineapple Essential 5L</span>
-            <div className="flex items-center gap-2">
-              <span className="text-[18px] font-[900] text-black leading-none">R$ 206,90</span>
-              <span className="text-[10px] text-[#666] bg-gray-100 px-2 py-0.5 rounded-full flex items-center gap-1"><CashbackIcon className="w-3 h-3" /> +R$ 10,34 cashback</span>
+            <span className="text-[12px] font-[700] text-[var(--text-dark)] truncate max-w-[180px] md:max-w-none block">Shampoo Pineapple Essential 5L</span>
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[15px] md:text-[18px] font-semibold text-black leading-none whitespace-nowrap">R$ 206,90</span>
+              <span className="text-[9px] md:text-[10px] text-[#666] bg-gray-100 px-1 md:px-2 py-0.5 rounded-full flex items-center gap-1 whitespace-nowrap shrink-0">
+                <CashbackIcon className="w-3 h-3" /> <span>+<strong className="font-bold">R$ 10,34</strong> cashback</span>
+              </span>
             </div>
           </div>
         </div>
-        <button className="bg-[#25D366] hover:bg-[#1DA851] text-white font-[900] uppercase tracking-wide text-[14px] md:text-[16px] py-2 md:py-3 px-6 md:px-8 rounded-[var(--radius-md)] flex items-center gap-2 transition-all hover:scale-[1.05] active:scale-[0.98] animate-strong-pulse shadow-[0_0_20px_rgba(37,211,102,0.8)]">
-          <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
+        <button className="bg-[#25D366] hover:bg-[#1DA851] text-white font-semibold uppercase tracking-wide text-[18px] py-2 md:py-3 px-6 md:px-8 rounded-[var(--radius-md)] flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]">
           <span className="hidden md:inline">Comprar agora</span>
           <span className="md:hidden">Comprar</span>
         </button>

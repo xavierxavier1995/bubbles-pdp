@@ -1,0 +1,1144 @@
+{% comment %}
+  ============================================================
+  BUBBLES PET — TEMPLATE DE PRODUTO PERSONALIZADO
+  Arquivo: templates/product.bubbles-pdp.liquid
+  Seção:   sections/bubbles-pdp.liquid
+
+  Variáveis Shopify utilizadas:
+    - product.title
+    - product.description
+    - product.images / product.featured_image
+    - product.price | money
+    - product.compare_at_price | money
+    - product.selected_or_first_available_variant
+    - product.metafields.custom.*
+    - shop.name / shop.url
+    - routes.cart_add_url
+    - linklists.*
+  ============================================================
+{% endcomment %}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_price   = current_variant.price | money
+  assign compare_price   = current_variant.compare_at_price | money
+  assign discount_pct    = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price | round
+  assign cashback_value  = current_variant.price | times: 0.05 | money
+  assign installment     = current_variant.price | divided_by: 6 | money
+-%}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ product.title }} - {{ shop.name }}</title>
+  <meta name="description" content="{{ product.description | strip_html | truncatewords: 30 }}" />
+
+  <!-- Preconnect / DNS Prefetch -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://cdn.shopify.com" />
+
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN (substituir pelo asset do tema em produção) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="{{ product.title }} - {{ shop.name }}" />
+  <meta property="og:description" content="{{ product.description | strip_html | truncatewords: 30 }}" />
+  <meta property="og:image"       content="{{ product.featured_image | img_url: '1200x630' }}" />
+  <meta property="og:url"         content="{{ shop.url }}{{ product.url }}" />
+  <meta property="og:type"        content="product" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="{{ product.title }}" />
+  <meta name="twitter:description" content="{{ product.description | strip_html | truncatewords: 30 }}" />
+  <meta name="twitter:image"       content="{{ product.featured_image | img_url: '1200x630' }}" />
+
+  <!-- JSON-LD: Product -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "image": [{{ product.featured_image | img_url: 'master' | json }}],
+      "description": {{ product.description | strip_html | json }},
+      "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      "brand": { "@type": "Brand", "name": {{ shop.name | json }} },
+      "offers": {
+        "@type": "Offer",
+        "url": {{ shop.url | append: product.url | json }},
+        "priceCurrency": "BRL",
+        "price": {{ current_variant.price | divided_by: 100.0 }},
+        "priceValidUntil": "2026-12-31",
+        "availability": {% if current_variant.available %}"https://schema.org/InStock"{% else %}"https://schema.org/OutOfStock"{% endif %},
+        "itemCondition": "https://schema.org/NewCondition"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "87"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qual a diferença entre o Neutralizador Pineapple e o tradicional?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A principal diferença está na fragrância e na formulação da edição especial. O Neutralizador Pineapple possui fragrância marcante de abacaxi, além de nova fórmula com maior formação de espuma." }
+        },
+        {
+          "@type": "Question",
+          "name": "A diluição é a mesma do Neutralizador Essential?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sim. A diluição recomendada é 1 parte de shampoo para 5 partes de água (1:5)." }
+        },
+        {
+          "@type": "Question",
+          "name": "Pode ser usado em cães e gatos?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sim, o produto pode ser utilizado em cães e gatos, respeitando sempre as recomendações de uso." }
+        },
+        {
+          "@type": "Question",
+          "name": "Posso guardar o produto já diluído?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Não. Após a diluição, o produto deve ser usado em até 24 horas. O produto concentrado tem validade de 24 meses." }
+        },
+        {
+          "@type": "Question",
+          "name": "Os produtos são testados em animais?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Não! Somos uma marca 100% cruelty-free. Nossos produtos não são testados em animais em nenhuma etapa da produção." }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Início",         "item": {{ shop.url | json }} },
+        { "@type": "ListItem", "position": 2, "name": "Shampoos",       "item": {{ shop.url | append: '/collections/shampoos' | json }} },
+        { "@type": "ListItem", "position": 3, "name": "Linha Essential","item": {{ shop.url | append: '/collections/essential' | json }} },
+        { "@type": "ListItem", "position": 4, "name": {{ product.title | json }}, "item": {{ shop.url | append: product.url | json }} }
+      ]
+    }
+  ]
+  </script>
+
+  <style>
+    :root {
+      --pink: #f4cdd4;
+      --pink-dark: #eec0c9;
+      --pink-light: #fdf0f6;
+      --orange: #e65100;
+      --yellow-light: #fff8e7;
+      --amber: #ffe082;
+      --green: #2db85a;
+      --text-dark: #1a1a1a;
+      --text-mid: #555555;
+      --text-light: #999999;
+      --border: #f0f0f0;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+    }
+    * { font-family: 'Poppins', sans-serif; }
+    .hero-gallery { min-height: 450px; contain: layout; }
+    .buy-box { contain: content; }
+    header { transform: translateZ(0); will-change: transform; transition: box-shadow 0.3s ease; }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee { animation: marquee 20s linear infinite; }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Gallery */
+    .gallery-thumb.active { border-color: #F4CDD4; }
+    .gallery-thumb { border-color: transparent; }
+
+    /* Accordion */
+    .accordion-content { display: none; }
+    .accordion-content.open { display: block; }
+
+    /* Sticky bar */
+    #sticky-bar { transform: translateY(100%); transition: transform 0.3s ease; }
+    #sticky-bar.visible { transform: translateY(0); }
+
+    /* Gift banner hidden by default */
+    #gift-banner { display: none; }
+
+    /* Shipping result */
+    #shipping-result { display: none; }
+  </style>
+</head>
+
+<body class="text-black bg-white min-h-screen relative pb-20 md:pb-0">
+
+  <!-- =============================================
+       BLOCO 1: BANNER ROTATIVO
+  ============================================= -->
+  <div class="bg-[#EAD1D6] text-[#333] text-[11px] font-[700] py-2 overflow-hidden flex items-center">
+    <div class="animate-marquee whitespace-nowrap flex items-center">
+      <span class="mx-6 flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        100% VEGANOS E CRUELTY FREE
+      </span>
+      <span class="mx-6 flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        A MARCA FAVORITA DOS MELHORES GROOMERS
+      </span>
+      <span class="mx-6 flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+        GANHE 10% OFF <span class="bg-white/60 px-2 py-0.5 rounded-full text-[10px]">PRIMEIRA10 Copiar</span>
+      </span>
+      <span class="mx-6 flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        FRETE GRÁTIS POR REGIÃO
+      </span>
+      <!-- Repetição para loop infinito -->
+      <span class="mx-6 flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        100% VEGANOS E CRUELTY FREE
+      </span>
+      <span class="mx-6 flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        A MARCA FAVORITA DOS MELHORES GROOMERS
+      </span>
+      <span class="mx-6 flex items-center gap-2">
+        GANHE 10% OFF <span class="bg-white/60 px-2 py-0.5 rounded-full text-[10px]">PRIMEIRA10 Copiar</span>
+      </span>
+      <span class="mx-6 flex items-center gap-2">FRETE GRÁTIS POR REGIÃO</span>
+    </div>
+  </div>
+
+  <!-- =============================================
+       BLOCO 2: HEADER
+  ============================================= -->
+  <header class="sticky top-0 z-50 bg-white border-b border-gray-100 h-[60px] md:h-[80px] flex items-center justify-between px-4 md:px-8">
+    <div class="flex items-center gap-4">
+      <button class="md:hidden text-[var(--text-dark)]" aria-label="Abrir menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="{{ shop.url }}" class="flex items-center gap-2">
+        <img
+          src="{{ shop.metafields.custom.logo_url | default: 'https://www.bubbles.com.br/cdn/shop/files/logo-bubbles.png?v=1754313552&width=165' }}"
+          alt="Logo {{ shop.name }} - Especialistas em Higiene Animal"
+          width="140" height="45"
+          class="h-8 md:h-10 w-auto object-contain"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </a>
+    </div>
+
+    <nav class="hidden lg:flex items-center gap-6 text-[14px] font-[600] text-black">
+      <a href="/collections/all" class="hover:text-[var(--pink)] transition-colors">Promoções</a>
+      <a href="/collections/shampoos" class="hover:text-[var(--pink)] transition-colors">Produtos</a>
+      <a href="/collections/essential" class="hover:text-[var(--pink)] transition-colors">Linhas</a>
+      <a href="/collections/all" class="hover:text-[var(--pink)] transition-colors">Necessidades</a>
+    </nav>
+
+    <div class="flex items-center gap-5">
+      <a href="/account" class="hidden md:block text-black hover:text-[var(--pink)] transition-colors" aria-label="Conta">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <a href="/cart" class="relative text-black hover:text-[var(--pink)] transition-colors" aria-label="Carrinho">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="absolute -top-2 -right-2 bg-[#EAD1D6] text-black text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+          {{ cart.item_count }}
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <div>
+
+    <!-- =============================================
+         BLOCO 3: BREADCRUMB
+    ============================================= -->
+    <nav aria-label="Breadcrumb" class="max-w-[1200px] mx-auto px-4 py-3 text-[11px] text-[var(--text-mid)] flex items-center gap-2 overflow-x-auto no-scrollbar whitespace-nowrap">
+      <a href="{{ shop.url }}" class="hover:text-[var(--pink)]">Início</a>
+      <span>&gt;</span>
+      <a href="/collections/shampoos" class="hover:text-[var(--pink)]">Shampoos</a>
+      <span>&gt;</span>
+      <a href="/collections/essential" class="hover:text-[var(--pink)]">Linha Essential</a>
+      <span>&gt;</span>
+      <span class="text-black">{{ product.title }}</span>
+    </nav>
+
+    <!-- =============================================
+         BLOCO 4: HERO — GALERIA + BUY BOX
+    ============================================= -->
+    <section class="max-w-[1200px] mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-[55%_45%] gap-8 md:gap-12">
+
+      <!-- GALERIA -->
+      <div class="flex flex-col md:flex-row gap-4 md:sticky md:top-24 self-start">
+
+        <!-- Miniaturas -->
+        <div class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto no-scrollbar pb-2 md:pb-0 md:pr-2 md:w-24 flex-shrink-0">
+          {%- for image in product.images -%}
+          <button
+            onclick="setMainImage({{ forloop.index0 }})"
+            data-thumb-index="{{ forloop.index0 }}"
+            class="gallery-thumb relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-[var(--radius-sm)] overflow-hidden border-2 transition-all {% if forloop.first %}active{% endif %}"
+            aria-label="Ver imagem {{ forloop.index }}"
+          >
+            <img
+              src="{{ image | img_url: '200x200', crop: 'center' }}"
+              alt="{{ image.alt | default: product.title }}"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </button>
+          {%- endfor -%}
+
+          <!-- Setas desktop -->
+          <div class="hidden md:flex items-center justify-center gap-4 mt-2">
+            <button onclick="prevImage()" class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 p-2 rounded-full" aria-label="Imagem anterior">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button onclick="nextImage()" class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 p-2 rounded-full" aria-label="Próxima imagem">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Imagem principal -->
+        <div class="order-1 md:order-2 relative aspect-square w-full rounded-[var(--radius-xl)] bg-gray-100 overflow-hidden group" id="main-image-container">
+          {%- for image in product.images -%}
+          <img
+            id="main-img-{{ forloop.index0 }}"
+            src="{{ image | img_url: '1100x1100', crop: 'center' }}"
+            alt="{{ image.alt | default: product.title }}"
+            class="absolute inset-0 w-full h-full object-cover cursor-pointer transition-opacity duration-300 {% unless forloop.first %}opacity-0{% endunless %}"
+            onclick="openFullscreen({{ forloop.index0 }})"
+            {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+          />
+          {%- endfor -%}
+
+          <button onclick="openFullscreen(currentImageIndex)" class="absolute top-4 left-4 bg-white/80 backdrop-blur-sm text-black p-2 rounded-lg shadow-sm transition-colors z-10 opacity-0 group-hover:opacity-100 md:opacity-100" aria-label="Ampliar imagem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- BUY BOX -->
+      <div class="flex flex-col">
+
+        <!-- Imagens circulares -->
+        <div class="mb-4">
+          <h3 class="text-[14px] font-[600] text-black mb-3 text-left">Veja mais sobre o produto</h3>
+          <div class="flex gap-3">
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-[#F4CDD4]">
+              <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=400&auto=format&fit=crop" alt="Uso no pet" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-[#F4CDD4]">
+              <img src="https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?q=80&w=400&auto=format&fit=crop" alt="Textura do produto" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-[#F4CDD4]">
+              <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=400&auto=format&fit=crop" alt="Detalhe" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
+        </div>
+
+        <h1 class="text-[20px] md:text-[26px] font-[600] text-[var(--text-dark)] leading-[1.2] mb-2 uppercase text-left">
+          {{ product.title }}
+        </h1>
+
+        <!-- Estrelas (Reviews — integrar com Loox ou Judge.me via snippet) -->
+        <div class="flex items-center gap-2 mb-6">
+          <div class="flex text-[#F4A522]">
+            {% for i in (1..5) %}
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            {% endfor %}
+          </div>
+          <span class="text-[13px] text-[var(--text-light)]">4.9 · </span>
+          <a href="#reviews" class="text-[13px] text-gray-500 underline font-medium hover:text-gray-700">87 avaliações</a>
+        </div>
+
+        <!-- Badge desconto -->
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+        <div class="mb-4">
+          <span class="bg-[var(--green)] text-white text-[12px] font-bold px-3 py-1 rounded-full uppercase">
+            {{ discount_pct }}% OFF
+          </span>
+        </div>
+        {%- endif -%}
+
+        <!-- Preço -->
+        <div class="mb-2 flex items-baseline gap-3 flex-wrap">
+          <span id="display-price" class="text-[32px] md:text-[40px] font-[600] text-black leading-none tracking-tighter">
+            {{ product_price }}
+          </span>
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="text-[15px] text-gray-400 line-through font-medium">{{ compare_price }}</span>
+          {%- endif -%}
+        </div>
+
+        <!-- Parcelamento -->
+        <div class="mb-2 md:mb-6">
+          <span class="text-[13px] text-gray-500 font-medium">6x de {{ installment }} sem juros</span>
+        </div>
+
+        <!-- Cashback -->
+        <div class="flex items-center justify-between text-[11px] md:text-[14px] text-[#666] mb-1 md:mb-6 font-medium bg-gray-50/50 px-1 py-1.5 rounded-lg md:bg-transparent md:p-0 whitespace-nowrap overflow-hidden">
+          <div class="flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#666]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21v-5h5"/><path d="M14 10h-3a1.5 1.5 0 0 0 0 3h2a1.5 1.5 0 0 1 0 3h-3"/><path d="M12 8v8"/></svg>
+            <span>Ganhe <strong class="text-black font-semibold" id="cashback-value">{{ cashback_value }}</strong></span>
+          </div>
+          <span class="text-[9px] md:hidden px-0.5 py-0.5 bg-[var(--pink-light)] text-[var(--text-dark)] rounded font-black tracking-tighter shrink-0 ml-1">CASHBACK</span>
+        </div>
+
+        <!-- Tabela de rendimento -->
+        <div class="grid grid-cols-3 gap-0 border border-gray-200 rounded-[10px] bg-[#f7f7f7] mb-4 order-3">
+          <div class="p-4 text-center border-r border-gray-200">
+            <span class="block text-[10px] text-gray-400 uppercase font-medium tracking-widest mb-1">Rendimento</span>
+            <span class="block text-[15px] font-medium text-black">{{ product.metafields.custom.rendimento | default: '300 banhos' }}</span>
+          </div>
+          <div class="p-4 text-center border-r border-gray-200">
+            <span class="block text-[10px] text-gray-400 uppercase font-medium tracking-widest mb-1">Custo/Banho</span>
+            <span class="block text-[15px] font-medium text-black">{{ product.metafields.custom.custo_banho | default: 'R$ 0,69' }}</span>
+          </div>
+          <div class="p-4 text-center">
+            <span class="block text-[10px] text-gray-400 uppercase font-medium tracking-widest mb-1">Diluição</span>
+            <span class="block text-[15px] font-medium text-black">{{ product.metafields.custom.diluicao | default: '1:5' }}</span>
+          </div>
+        </div>
+
+        <!-- Garantias -->
+        <div class="py-4 md:py-6 mb-4 md:mb-8 border-b border-gray-200 order-5 md:order-4">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            <div class="flex flex-col items-center text-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#fdf2f4] flex items-center justify-center">
+                <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.28"/></svg>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[11px] font-medium text-black uppercase tracking-tighter">Garantia</span>
+                <span class="text-[10px] text-gray-400 font-medium whitespace-nowrap">7 dias para trocar</span>
+              </div>
+            </div>
+            <div class="flex flex-col items-center text-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#fdf2f4] flex items-center justify-center">
+                <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[11px] font-medium text-black uppercase tracking-tighter">Compra segura</span>
+                <span class="text-[10px] text-gray-400 font-medium whitespace-nowrap">Sem burocracia</span>
+              </div>
+            </div>
+            <div class="flex flex-col items-center text-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#fdf2f4] flex items-center justify-center">
+                <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[11px] font-medium text-black uppercase tracking-tighter">Até 6x S/ JUROS</span>
+                <span class="text-[10px] text-gray-400 font-medium whitespace-nowrap">Com nota fiscal</span>
+              </div>
+            </div>
+            <div class="flex flex-col items-center text-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#fdf2f4] flex items-center justify-center">
+                <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.1a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[11px] font-medium text-black uppercase tracking-tighter">Suporte</span>
+                <span class="text-[10px] text-gray-400 font-medium whitespace-nowrap">Expertise Real</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUANTIDADE + BOTÃO COMPRAR -->
+        <div class="mb-4 order-4 md:order-5">
+          <p class="font-[700] text-[12px] text-[var(--text-dark)] uppercase mb-2">QUANTIDADE:</p>
+          <div class="flex flex-col gap-3">
+            <div class="flex gap-3">
+              <div class="flex items-center border border-[#E0E0E0] rounded-[var(--radius-md)] h-[52px] bg-white w-[120px] flex-shrink-0">
+                <button onclick="changeQty(-1)" class="w-10 h-full flex items-center justify-center text-[var(--text-mid)] hover:text-[var(--pink)] transition-colors" aria-label="Diminuir quantidade">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <span id="qty-display" class="flex-1 text-center font-bold text-[16px]">1</span>
+                <button onclick="changeQty(1)" class="w-10 h-full flex items-center justify-center text-[var(--text-mid)] hover:text-[var(--pink)] transition-colors" aria-label="Aumentar quantidade">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+              </div>
+
+              <form action="{{ routes.cart_add_url }}" method="post" class="flex-1">
+                <input type="hidden" name="id" value="{{ current_variant.id }}" />
+                <input type="hidden" name="quantity" id="cart-qty" value="1" />
+                <button
+                  id="add-to-cart-btn"
+                  type="submit"
+                  class="w-full h-[52px] bg-[#25D366] hover:bg-[#1DA851] text-white font-semibold text-[16px] md:text-[18px] uppercase tracking-wide rounded-[10px] flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]"
+                >
+                  Comprar
+                </button>
+              </form>
+            </div>
+
+            <!-- Banner de brinde (aparece quando total >= 399) -->
+            <div id="gift-banner" class="bg-gradient-to-r from-[#ff8da1] to-[var(--pink)] text-white p-1 md:p-3 rounded-[var(--radius-md)] flex items-center gap-1.5 md:gap-3 shadow-[0_4px_15px_rgba(244,143,161,0.4)] border border-[#ffb3c1]">
+              <svg class="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+              <div class="flex-1 min-w-0">
+                <span class="block font-bold text-[10px] sm:text-[11px] md:text-[14px] uppercase tracking-wide truncate">Brinde Grátis Desbloqueado!</span>
+                <span class="block text-[9px] sm:text-[10px] md:text-[12px] opacity-90">Brinde especial em compras acima de <strong class="font-black">R$399,00</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CALCULAR FRETE -->
+        <div class="p-0 mb-4 md:mb-6 order-6">
+          <h4 class="font-[700] text-[12px] text-[var(--text-dark)] uppercase mb-2 flex items-center gap-2">
+            Frete e Prazo
+            <svg class="w-4 h-4 text-[var(--pink)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </h4>
+          <form onsubmit="calcularFrete(event)" class="flex gap-2">
+            <div class="relative flex-1">
+              <input
+                type="text"
+                id="cep-input"
+                placeholder="Informe seu CEP"
+                maxlength="9"
+                oninput="this.value=this.value.replace(/\D/g,'').replace(/(\d{5})(\d)/,'$1-$2').slice(0,9)"
+                class="w-full h-[48px] px-4 bg-gray-50 border-none rounded-[10px] text-[14px] font-semibold outline-none focus:ring-2 focus:ring-[#f4cdd4]"
+              />
+            </div>
+            <button type="submit" class="h-[48px] px-6 bg-[#F4CDD4] text-black font-semibold text-[12px] uppercase tracking-widest rounded-[10px] hover:bg-[#eec0c9] transition-all active:scale-95">
+              Calcular
+            </button>
+          </form>
+          <div id="shipping-result" class="mt-4 pt-4 border-t border-gray-50 flex justify-between items-center text-[13px]">
+            <div class="flex flex-col">
+              <span class="font-black text-black uppercase text-[10px] tracking-tight">Sedex Express</span>
+              <span class="text-gray-400 font-medium">Entrega em até 3 dias úteis</span>
+            </div>
+            <span class="font-black text-black text-[15px]">R$ 15,90</span>
+          </div>
+        </div>
+
+        <!-- Selos circulares -->
+        <div class="flex justify-between items-center pt-6 border-t border-[var(--border)] gap-2 order-7">
+          {%- assign emblems = 'linha premium,100% veganos,cruelty free,100% nacional' | split: ',' -%}
+          {%- assign emblem_ids = 'premium,veganos,cruelty,nacional' | split: ',' -%}
+          {%- for emblem in emblems -%}
+          {%- assign eid = emblem_ids[forloop.index0] -%}
+          <div class="w-[70px] h-[70px] md:w-[80px] md:h-[80px] flex-shrink-0 relative flex items-center justify-center bg-white rounded-full">
+            <svg viewBox="0 0 100 100" class="absolute inset-0 w-full h-full">
+              <circle cx="50" cy="50" r="48" fill="none" stroke="#1A1A1A" stroke-width="1.5" />
+              <path d="M 81.6, 35 A 35,35 0 1,1 18.4, 35" fill="none" stroke="#1A1A1A" stroke-width="1" />
+              <path id="curve-{{ eid }}" d="M 13,50 a 37,37 0 1,1 74,0" fill="none" />
+              <text font-size="8.5" font-weight="600" fill="#1A1A1A" letter-spacing="0.05em">
+                <textPath href="#curve-{{ eid }}" startOffset="50%" text-anchor="middle">{{ emblem }}</textPath>
+              </text>
+            </svg>
+            <svg class="w-5 h-5 text-[#1A1A1A] relative z-10 mt-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              {%- case eid -%}
+              {%- when 'premium' -%}<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              {%- when 'veganos' -%}<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              {%- when 'cruelty' -%}<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              {%- when 'nacional' -%}<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              {%- endcase -%}
+            </svg>
+          </div>
+          {%- endfor -%}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =============================================
+         BLOCO 5: BARRA DE BENEFÍCIOS
+    ============================================= -->
+    <section class="bg-white py-16 px-4 border-t border-b border-gray-100">
+      <div class="max-w-[1240px] mx-auto">
+        <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-12">
+          <div class="md:w-1/3 text-center md:text-left">
+            <h2 class="text-[32px] md:text-[40px] font-semibold text-black leading-[1.1] uppercase tracking-tighter">
+              O Segredo <br class="hidden md:block"/> dos Melhores <br class="hidden md:block"/> Groomers.
+            </h2>
+          </div>
+          <div class="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+            {%- assign benefits = 'Neutralização na Raiz|Ação molecular profunda que elimina odores sem mascarar.,Hidratação de Seda|Tecnologia Deoplex Clear para pelagem macia e brilhante.,Rendimento Extremo|Diluição real de 1:5, transformando 5L em 30L prontos.,Fragrância Tropical|Experiência olfativa marcante e refrescante de abacaxi.' | split: ',' -%}
+            {%- for benefit in benefits -%}
+            {%- assign parts = benefit | split: '|' -%}
+            <div class="flex items-start gap-4 group">
+              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-[#F4CDD4] flex items-center justify-center text-black group-hover:bg-black group-hover:text-white transition-all duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-[16px] text-black uppercase tracking-tight mb-1">{{ parts[0] }}</h4>
+                <p class="text-[13px] text-gray-400 font-medium leading-relaxed">{{ parts[1] }}</p>
+              </div>
+            </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         BLOCO 6: ACCORDIONS — TUDO SOBRE O PRODUTO
+    ============================================= -->
+    <section class="max-w-[800px] mx-auto px-4 py-16">
+      <h2 class="text-[22px] md:text-[26px] font-semibold text-[var(--text-dark)] mb-6 text-center">Tudo sobre o produto</h2>
+
+      <div class="border border-[var(--border)] rounded-[var(--radius-lg)] overflow-hidden bg-white">
+
+        <!-- Descrição -->
+        <div class="border-b border-[var(--border)]">
+          <button onclick="toggleAccordion(1)" class="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors" aria-expanded="true" aria-controls="acc-1">
+            <span class="font-bold text-[15px] text-[var(--text-dark)] flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#999]" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Descrição
+            </span>
+            <svg id="acc-1-icon" class="w-5 h-5 text-[var(--text-mid)] transition-transform rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+          </button>
+          <div id="acc-1" class="accordion-content open px-6 pb-6 pt-2 text-[14px] text-[var(--text-mid)] leading-relaxed space-y-4">
+            {{ product.description }}
+          </div>
+        </div>
+
+        <!-- Benefícios -->
+        <div class="border-b border-[var(--border)]">
+          <button onclick="toggleAccordion(2)" class="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors" aria-expanded="false" aria-controls="acc-2">
+            <span class="font-bold text-[15px] text-[var(--text-dark)] flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#999]" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Benefícios
+            </span>
+            <svg id="acc-2-icon" class="w-5 h-5 text-[var(--text-mid)] transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+          </button>
+          <div id="acc-2" class="accordion-content px-6 pb-6 pt-2 text-[14px] text-[var(--text-mid)] leading-relaxed">
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300 flex-shrink-0"></div> <strong class="font-[600]">Neutraliza odores</strong> da pelagem, atuando nas principais fontes de mau cheiro</li>
+              <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300 flex-shrink-0"></div> <strong class="font-[600]">Nova fórmula com maior formação de espuma</strong>, facilitando o banho</li>
+              <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300 flex-shrink-0"></div> <strong class="font-[600]">Fragrância marcante de abacaxi</strong> (Pineapple), com sensação tropical</li>
+              <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300 flex-shrink-0"></div> Limpeza eficiente <strong class="font-[600]">sem agredir a pele e os pelos</strong></li>
+              <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300 flex-shrink-0"></div> Deixa a pelagem <strong class="font-[600]">macia, leve e perfumada</strong> por mais tempo</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Modo de uso -->
+        <div class="border-b border-[var(--border)]">
+          <button onclick="toggleAccordion(3)" class="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors" aria-expanded="false" aria-controls="acc-3">
+            <span class="font-bold text-[15px] text-[var(--text-dark)] flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#999]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              Modo de uso
+            </span>
+            <svg id="acc-3-icon" class="w-5 h-5 text-[var(--text-mid)] transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+          </button>
+          <div id="acc-3" class="accordion-content px-6 pb-6 pt-2 text-[14px] text-[var(--text-mid)] leading-relaxed">
+            <p><strong class="font-[600]">Dilua uma porção de shampoo para cinco porções de água</strong>, misturando com movimentos circulares até a diluição total. Com um frasco diluidor, aplique o produto e, com as mãos, <strong class="font-[600]">massageie os pelos até formar uma rica espuma</strong>. Após a limpeza, remova totalmente a espuma dos pelos.</p>
+          </div>
+        </div>
+
+        <!-- Composição -->
+        <div class="border-b border-[var(--border)] last:border-0">
+          <button onclick="toggleAccordion(4)" class="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors" aria-expanded="false" aria-controls="acc-4">
+            <span class="font-bold text-[15px] text-[var(--text-dark)] flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#999]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Composição
+            </span>
+            <svg id="acc-4-icon" class="w-5 h-5 text-[var(--text-mid)] transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+          </button>
+          <div id="acc-4" class="accordion-content px-6 pb-6 pt-2 text-[14px] text-[var(--text-mid)] leading-relaxed">
+            <p class="uppercase text-xs leading-relaxed">
+              {{ product.metafields.custom.composicao | default: 'ÁGUA, LAURILSULFATO DE SÓDIO, COCOAMIDOPROPILBETAÍNA, DIETANOLAMINA COCAMIDA, FRAGRÂNCIA, PEG-90M, DIESTEARATO DE PEG-150, POLIQUATÉRNIO-7, EDETATO DISSÓDICO, METILCLOROISOTIAZOLINONA E METILISOTIAZOLINONA, HEXIL CINAMAL, LIMONENO, ÁCIDO CÍTRICO, LINALOL, CORANTE AMARELO DE TARTRAZINA 19140.' }}
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =============================================
+         BLOCO 7: COMPARAÇÃO BUBBLES vs MERCADO
+    ============================================= -->
+    <section class="bg-white py-24 px-4 overflow-hidden">
+      <div class="max-w-[1100px] mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-[22px] md:text-[26px] font-semibold text-black uppercase tracking-tighter mb-4">O Padrão Bubbles vs. O Mercado Comum</h2>
+          <p class="text-[14px] md:text-[16px] text-gray-500 max-w-2xl mx-auto font-medium">Entenda por que groomers profissionais não trocam a Bubbles por marcas genéricas.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch">
+          <!-- Sem Bubbles -->
+          <div class="relative p-8 md:p-10 rounded-[10px] bg-[#F9F9F9] border border-dashed border-gray-300 opacity-70">
+            <div class="mb-8">
+              <span class="text-[10px] font-semibold text-gray-400 uppercase tracking-[2px] mb-2 block">Marcas Genéricas</span>
+              <h3 class="text-xl md:text-2xl font-semibold text-gray-500 uppercase">A Realidade Comum</h3>
+            </div>
+            <ul class="space-y-5">
+              {%- assign cons = 'Odor de mau cheiro volta em poucas horas,Pelagem ressecada, opaca e sem vida,Fórmula que apenas máscara o cheiro,Baixo rendimento: gasta mais para limpar' | split: ',' -%}
+              {%- for con in cons -%}
+              <li class="flex items-start gap-3">
+                <div class="mt-1 flex-shrink-0 w-5 h-5 rounded-full border border-red-200 bg-red-50 flex items-center justify-center">
+                  <svg class="w-3 h-3 text-red-400" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </div>
+                <span class="text-[14px] font-medium text-gray-400 leading-snug">{{ con }}</span>
+              </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+          <!-- Com Bubbles -->
+          <div class="relative p-8 md:p-10 rounded-[10px] bg-[#fdf5f7] border-2 border-[#F4CDD4] md:scale-[1.03] origin-center">
+            <div class="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#F4CDD4] to-[#f0a8b8] rounded-t-[10px]"></div>
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black text-white text-[10px] font-semibold px-4 py-2 rounded-full uppercase tracking-widest shadow-lg z-10">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Escolha Profissional
+            </div>
+            <div class="mb-8">
+              <span class="text-[10px] font-bold text-[var(--pink)] uppercase tracking-[2px] mb-2 block">Bubbles Essential</span>
+              <h3 class="text-xl md:text-2xl font-semibold text-black uppercase">O Padrão Bubbles</h3>
+            </div>
+            <ul class="space-y-5">
+              {%- assign pros = 'Odor neutralizado na molécula (Tecnologia Deoplex Clear),Pelagem intensamente macia, brilhante e hidratada,Limpeza profunda que respeita a barreira cutânea,Diluição Real 1:5: Economia comprovada por banho' | split: ',' -%}
+              {%- for pro in pros -%}
+              <li class="flex items-start gap-3">
+                <div class="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-[#F4CDD4] flex items-center justify-center">
+                  <svg class="w-3 h-3 text-black" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span class="text-[15px] font-semibold text-black leading-snug">{{ pro }}</span>
+              </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         BLOCO 8: COMPRE JUNTO (Bundle)
+         Nota: Integrar com app "Frequently Bought Together" ou similar
+    ============================================= -->
+    <section class="max-w-[1000px] mx-auto px-4 py-16">
+      <div class="bg-[var(--yellow-light)] border-2 border-dashed border-[var(--amber)] rounded-[var(--radius-lg)] p-6 md:p-10">
+        <div class="text-center mb-8">
+          <h2 class="text-[22px] md:text-[26px] font-semibold text-[var(--text-dark)] mb-2 flex items-center justify-center gap-3">
+            <svg class="w-6 h-6 text-[var(--orange)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+            Compre Junto
+          </h2>
+          <p class="text-[15px] text-[var(--text-mid)]">O combo favorito dos groomers profissionais</p>
+        </div>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mb-8">
+          <div class="flex flex-col items-center text-center w-full md:w-1/3">
+            <div class="w-24 h-24 bg-white rounded-xl shadow-sm flex items-center justify-center mb-3 text-[var(--pink)]">
+              <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/></svg>
+            </div>
+            <p class="text-[13px] font-bold text-[var(--text-dark)]">Shampoo Pineapple 5L</p>
+          </div>
+          <div class="text-2xl font-bold text-[var(--orange)]">+</div>
+          <div class="flex flex-col items-center text-center w-full md:w-1/3">
+            <div class="w-24 h-24 bg-white rounded-xl shadow-sm flex items-center justify-center mb-3 text-[var(--pink)]">
+              <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+            </div>
+            <p class="text-[13px] font-bold text-[var(--text-dark)]">Condicionador Essential 5L</p>
+          </div>
+          <div class="text-2xl font-bold text-[var(--orange)]">+</div>
+          <div class="flex flex-col items-center text-center w-full md:w-1/3">
+            <div class="w-24 h-24 bg-white rounded-xl shadow-sm flex items-center justify-center mb-3 text-[var(--pink)]">
+              <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+            </div>
+            <p class="text-[13px] font-bold text-[var(--text-dark)]">Deo Colônia Pineapple 500ml</p>
+          </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-center justify-between bg-white p-6 rounded-xl shadow-sm">
+          <div class="flex flex-col items-center md:items-start mb-4 md:mb-0">
+            <span class="text-[14px] text-[#BBB] line-through mb-1">R$ 341,70</span>
+            <div class="flex items-center gap-3">
+              <span class="text-[32px] font-[900] text-[var(--text-dark)] leading-none">R$ 289,90</span>
+              <span class="bg-[var(--orange)] text-white text-[11px] font-bold px-2 py-1 rounded-md">Economize R$ 51,80</span>
+            </div>
+          </div>
+          <button class="w-full md:w-auto px-8 py-4 bg-[var(--orange)] hover:bg-[#d84b00] text-white font-[800] text-[16px] rounded-[10px] transition-colors flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Adicionar Kit ao Carrinho
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         BLOCO 9: REVIEWS
+         Nota: Substituir pelo widget do app Judge.me ou Loox
+         {{ product | judge_me_review_widget }}
+    ============================================= -->
+    <section id="reviews" class="bg-[var(--pink-light)] py-16 px-4">
+      <div class="max-w-[800px] mx-auto">
+        <h2 class="text-center text-[22px] md:text-[26px] font-semibold text-[var(--text-dark)] mb-8">Confira o que os groomers estão dizendo</h2>
+        <div class="flex flex-col items-center mb-8">
+          <div class="flex items-center gap-4 mb-2">
+            <span class="text-[36px] font-semibold text-[var(--text-dark)] leading-none">4.9</span>
+            <div class="flex flex-col">
+              <div class="flex text-[#F4A522] mb-1">
+                {% for i in (1..5) %}<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>{% endfor %}
+              </div>
+              <span class="text-[13px] text-[var(--text-mid)]">87 avaliações verificadas</span>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-3 mb-8">
+          {%- assign reviews = product.metafields.custom.reviews.value -%}
+          {%- if reviews != blank -%}
+            {% comment %} Renderizar reviews via metafield se disponível {% endcomment %}
+            {% for review in reviews %}
+            <div class="bg-white rounded-[var(--radius-md)] p-6 shadow-sm">
+              <div class="flex justify-between items-start mb-3">
+                <div class="flex flex-col">
+                  <span class="font-bold text-[15px] text-[var(--text-dark)]">{{ review.name }}</span>
+                  <div class="flex text-[#F4A522]">{% for i in (1..5) %}<svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>{% endfor %}</div>
+                </div>
+                <span class="text-[12px] text-[var(--text-light)]">{{ review.date }}</span>
+              </div>
+              <p class="text-[14px] text-[var(--text-mid)] leading-relaxed">{{ review.text }}</p>
+            </div>
+            {% endfor %}
+          {%- else -%}
+          <!-- Reviews estáticos de fallback -->
+          <div class="bg-white rounded-[var(--radius-md)] p-6 shadow-sm">
+            <div class="flex justify-between items-start mb-3">
+              <div class="flex flex-col">
+                <span class="font-bold text-[15px] text-[var(--text-dark)]">Camila R.</span>
+                <div class="flex text-[#F4A522]">{% for i in (1..5) %}<svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>{% endfor %}</div>
+              </div>
+              <span class="text-[12px] text-[var(--text-light)]">15/03/2025</span>
+            </div>
+            <p class="text-[14px] text-[var(--text-mid)] leading-relaxed">"Uso há 8 meses no meu pet shop e não troco por nada. O odor some de verdade, não é aquela coisa de mascarar com perfume. A diluição 1:5 rende absurdamente bem — um frasco de 5L dura quase 2 meses no meu volume de atendimento."</p>
+          </div>
+          <div class="bg-white rounded-[var(--radius-md)] p-6 shadow-sm">
+            <div class="flex justify-between items-start mb-3">
+              <div class="flex flex-col">
+                <span class="font-bold text-[15px] text-[var(--text-dark)]">Marcos T.</span>
+                <div class="flex text-[#F4A522]">{% for i in (1..5) %}<svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>{% endfor %}</div>
+              </div>
+              <span class="text-[12px] text-[var(--text-light)]">02/03/2025</span>
+            </div>
+            <p class="text-[14px] text-[var(--text-mid)] leading-relaxed">"O pelo fica sedoso desde a primeira lavagem. O cheiro de abacaxi é suave e agradável, dura horas depois do banho. Melhor neutralizador que já usei em 12 anos de profissão."</p>
+          </div>
+          {%- endif -%}
+        </div>
+        <div class="flex justify-center">
+          <button class="px-8 py-3 border-2 border-black text-black font-bold rounded-full hover:bg-gray-50 transition-colors">Ver todas as 87 avaliações ›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         BLOCO: VISTOS RECENTEMENTE
+         Nota: Integrar com a seção native do Shopify "Recently Viewed"
+         ou app "Recently Viewed Products"
+    ============================================= -->
+    <section class="py-12 px-4 bg-white">
+      <div class="max-w-[1200px] mx-auto">
+        <h2 class="text-[18px] md:text-[20px] font-semibold text-[var(--text-dark)] mb-6 uppercase tracking-tight">Vistos recentemente</h2>
+        <div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar touch-pan-x">
+          {%- assign recently_viewed = recommendations.products | default: blank -%}
+          {%- if recently_viewed != blank -%}
+            {%- for rec_prod in recently_viewed limit: 4 -%}
+            <a href="{{ rec_prod.url }}" class="min-w-[160px] md:min-w-[200px] bg-[#F9F9F9] rounded-[var(--radius-md)] p-4 border border-transparent hover:border-[var(--pink-light)] transition-all flex-shrink-0">
+              <div class="w-full aspect-square bg-white rounded-lg mb-3 overflow-hidden">
+                <img src="{{ rec_prod.featured_image | img_url: '300x300', crop: 'center' }}" alt="{{ rec_prod.title }}" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <h3 class="font-bold text-[13px] text-[var(--text-dark)] line-clamp-1 mb-1">{{ rec_prod.title }}</h3>
+              <p class="font-black text-[14px] text-[var(--pink)]">{{ rec_prod.price | money }}</p>
+            </a>
+            {%- endfor -%}
+          {%- else -%}
+          <!-- Fallback estático -->
+          {%- assign rec_items = 'Shampoo Basiq 5L,R$149.90,🧴|Condicionador Essential 5L,R$139.90,💆|Colônia Pineapple 500ml,R$59.90,🌸|Máscara Hidratação 1kg,R$89.90,✨' | split: '|' -%}
+          {%- for item in rec_items -%}
+          {%- assign parts = item | split: ',' -%}
+          <div class="min-w-[160px] md:min-w-[200px] bg-[#F9F9F9] rounded-[var(--radius-md)] p-4 border border-transparent hover:border-[var(--pink-light)] transition-all cursor-pointer flex-shrink-0">
+            <div class="w-full aspect-square bg-white rounded-lg mb-3 flex items-center justify-center text-3xl shadow-sm">{{ parts[2] }}</div>
+            <h3 class="font-bold text-[13px] text-[var(--text-dark)] line-clamp-1 mb-1">{{ parts[0] }}</h3>
+            <p class="font-black text-[14px] text-[var(--pink)]">{{ parts[1] }}</p>
+          </div>
+          {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         BLOCO: NOSSA ESSÊNCIA — QUEM É A BUBBLES
+    ============================================= -->
+    <section id="quem-somos" class="relative py-12 px-4 md:px-10 overflow-hidden flex items-center min-h-[60vh]">
+      <video autoplay muted loop playsinline preload="none"
+        poster="https://bubbles.gabrielxavier.online/capa_linha-pro.jpg"
+        class="absolute inset-0 w-full h-full object-cover z-0">
+        <source src="https://www.bubbles.com.br/cdn/shop/videos/c/vp/6fd9894dcddb47b5883886091db28520/6fd9894dcddb47b5883886091db28520.HD-1080p-7.2Mbps-45960585.mp4?v=0" type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 bg-black/70 z-10"></div>
+
+      <div class="max-w-7xl mx-auto relative z-20 w-full">
+        <div class="text-center mb-12">
+          <span class="text-[#F4CDD4] text-[10px] font-semibold uppercase tracking-[0.4em] mb-3 block">Nossa Essência</span>
+          <h2 class="text-2xl md:text-4xl font-semibold text-white mb-6 tracking-tighter">Quem é a <span class="text-[#F4CDD4]">Bubbles®?</span></h2>
+          <div class="max-w-2xl mx-auto text-center">
+            <div class="space-y-4 text-white/90 text-sm md:text-lg leading-relaxed font-medium">
+              <p>A Bubbles® nasceu da vontade de transformar a experiência de banho e tosa em algo mais profissional, sensorial e consciente, tanto para o groomer quanto para o pet.</p>
+              <p>Com <span class="text-[#F4CDD4] font-semibold">mais de 7 anos de história</span>, elevamos o padrão do mercado, transformando cada atendimento em uma experiência memorável.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Carousel -->
+        <div class="relative group" id="stats-carousel-wrapper">
+          <button onclick="scrollCarousel('left')" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-30 bg-white/10 backdrop-blur-md border border-white/20 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity hidden md:block" aria-label="Anterior">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button onclick="scrollCarousel('right')" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-30 bg-white/10 backdrop-blur-md border border-white/20 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity hidden md:block" aria-label="Próximo">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <div id="stats-carousel" class="flex gap-4 overflow-x-auto pb-8 snap-x snap-mandatory no-scrollbar touch-pan-x lg:grid lg:grid-cols-5 lg:gap-3">
+            {%- assign stats = '+7 Anos|Tempo de Mercado|Pioneirismo e Inovação,4.9/5.0|NPS e Satisfação|Aprovação Máxima,+5.000|Base de Groomers|Especialistas de Elite,+20.000|Clientes Ativos|Tutores Apaixonados,+50|Mix de Soluções|Produtos Exclusivos' | split: ',' -%}
+            {%- for stat in stats -%}
+            {%- assign parts = stat | split: '|' -%}
+            <div class="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-[20px] text-center shadow-2xl hover:bg-white/10 transition-all duration-500 min-w-[200px] lg:min-w-0 snap-center flex-shrink-0">
+              <p class="text-xl font-semibold text-white mb-1 tracking-tight">{{ parts[0] }}</p>
+              <p class="text-[#F4CDD4] text-[11px] font-semibold uppercase tracking-widest mb-1">{{ parts[1] }}</p>
+              <p class="text-white/40 text-[10px] font-semibold uppercase tracking-tighter">{{ parts[2] }}</p>
+            </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         BLOCO 13: FAQ
+    ============================================= -->
+    <section class="bg-white max-w-[800px] mx-auto px-4 py-16">
+      <h2 class="text-center text-[24px] md:text-[28px] font-semibold text-[var(--text-dark)] mb-8">Perguntas frequentes</h2>
+
+      <div class="space-y-3" id="faq-list">
+        {%- assign faqs = product.metafields.custom.faqs.value -%}
+        {%- if faqs != blank -%}
+          {%- for faq in faqs -%}
+          <div class="border border-[var(--border)] rounded-[var(--radius-md)] overflow-hidden bg-white">
+            <button onclick="toggleFaq({{ forloop.index0 }})" aria-expanded="false" class="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors text-left">
+              <span class="font-semibold text-[15px] text-[var(--text-dark)] pr-4">{{ faq.question }}</span>
+              <svg class="faq-icon w-5 h-5 text-[var(--text-mid)] flex-shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+            </button>
+            <div class="faq-answer hidden px-6 pb-5 pt-1 text-[14px] text-[var(--text-mid)] leading-relaxed border-t border-gray-50">{{ faq.answer }}</div>
+          </div>
+          {%- endfor -%}
+        {%- else -%}
+        <!-- FAQs estáticas de fallback -->
+        {%- assign static_faqs = 'Qual a diferença entre o Neutralizador Pineapple e o Neutralizador Essential tradicional?|A principal diferença está na fragrância e na formulação da edição especial. O Neutralizador Pineapple possui fragrância marcante de abacaxi, além de nova fórmula com maior formação de espuma.,O Neutralizador Pineapple substitui o Neutralizador Essential tradicional?|Não. Ele é uma edição especial da linha Essential criada como uma opção diferenciada de fragrância.,A diluição é a mesma do Neutralizador Essential?|Sim. A diluição recomendada é 1 parte de shampoo para 5 partes de água.,Ele realmente neutraliza odores ou apenas perfuma?|O produto foi desenvolvido para auxiliar na redução dos odores da pelagem, atuando nas principais fontes de mau cheiro.,A fragrância de abacaxi é muito forte?|A fragrância foi desenvolvida para ser marcante e agradável, trazendo uma sensação tropical e refrescante após o banho.,Pode ser usado em cães e gatos?|Sim, o produto pode ser utilizado em cães e gatos respeitando as recomendações de uso.,Posso guardar o produto já diluído?|Não. Após a diluição o produto deve ser usado em até 24 horas. O produto concentrado tem validade de 24 meses.,Os produtos são testados em animais?|Não! Somos uma marca 100% cruelty-free. Nossos produtos não são testados em animais em nenhuma etapa da produção.' | split: ',' -%}
+        {%- for item in static_faqs -%}
+        {%- assign parts = item | split: '|' -%}
+        <div class="border border-[var(--border)] rounded-[var(--radius-md)] overflow-hidden bg-white">
+          <button onclick="toggleFaq({{ forloop.index0 }})" aria-expanded="false" class="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors text-left">
+            <span class="font-semibold text-[15px] text-[var(--text-dark)] pr-4">{{ parts[0] }}</span>
+            <svg class="faq-icon w-5 h-5 text-[var(--text-mid)] flex-shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 pt-1 text-[14px] text-[var(--text-mid)] leading-relaxed border-t border-gray-50">{{ parts[1] }}</div>
+        </div>
+        {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </section>
+
+  </div><!-- fim div wrapper principal -->
+
+  <!-- =============================================
+       FULLSCREEN MODAL
+  ============================================= -->
+  <div id="fullscreen-modal" class="fixed inset-0 z-[1000] bg-black/95 flex items-center justify-center backdrop-blur-sm hidden" onclick="closeFullscreen()">
+    <button onclick="event.stopPropagation(); closeFullscreen()" class="absolute top-6 right-6 text-white/70 hover:text-white bg-black/50 p-2 rounded-full z-50" aria-label="Fechar">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button onclick="event.stopPropagation(); prevImage()" class="absolute left-4 md:left-10 text-white/70 hover:text-[var(--pink)] bg-black/50 p-3 rounded-full z-50" aria-label="Imagem anterior">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="relative w-full max-w-5xl h-[60vh] md:h-[85vh] flex items-center justify-center" onclick="event.stopPropagation()">
+      <img id="fullscreen-img" src="" alt="{{ product.title }}" class="max-w-full max-h-full object-contain" loading="lazy" />
+    </div>
+    <button onclick="event.stopPropagation(); nextImage()" class="absolute right-4 md:right-10 text-white/70 hover:text-[var(--pink)] bg-black/50 p-3 rounded-full z-50" aria-label="Próxima imagem">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+
+  <!-- =============================================
+       STICKY ADD TO CART BAR
+  ============================================= -->
+  <div id="sticky-bar" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3 md:px-8 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-[999] flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-12 h-12 rounded-md overflow-hidden border border-gray-100 hidden sm:block">
+        <img src="{{ product.featured_image | img_url: '100x100', crop: 'center' }}" alt="Miniatura de {{ product.title }}" class="w-full h-full object-cover" loading="lazy" />
+      </div>
+      <div class="flex flex-col">
+        <span class="text-[12px] font-[700] text-[var(--text-dark)] truncate max-w-[180px] md:max-w-none block">{{ product.title | truncate: 40 }}</span>
+        <div class="flex items-center gap-1.5 md:gap-2">
+          <span class="text-[15px] md:text-[18px] font-semibold text-black leading-none whitespace-nowrap">{{ product_price }}</span>
+          <span class="text-[9px] md:text-[10px] text-[#666] bg-gray-100 px-1 md:px-2 py-0.5 rounded-full flex items-center gap-1 whitespace-nowrap shrink-0">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21v-5h5"/><path d="M14 10h-3a1.5 1.5 0 0 0 0 3h2a1.5 1.5 0 0 1 0 3h-3"/><path d="M12 8v8"/></svg>
+            <span>+<strong class="font-bold">{{ cashback_value }}</strong> cashback</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <form action="{{ routes.cart_add_url }}" method="post">
+      <input type="hidden" name="id" value="{{ current_variant.id }}" />
+      <input type="hidden" name="quantity" value="1" />
+      <button type="submit" class="bg-[#25D366] hover:bg-[#1DA851] text-white font-semibold uppercase tracking-wide text-[18px] py-2 md:py-3 px-6 md:px-8 rounded-[var(--radius-md)] flex items-center justify-center transition-all hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]">
+        <span class="hidden md:inline">Comprar agora</span>
+        <span class="md:hidden">Comprar</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- =============================================
+       JAVASCRIPT — VANILLA
+  ============================================= -->
+  <script>
+    // ---- Dados do produto via Liquid ----
+    const PRODUCT_IMAGES = [
+      {%- for image in product.images -%}
+      { url: {{ image | img_url: 'master' | json }}, alt: {{ image.alt | default: product.title | json }} }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ];
+    const BASE_PRICE = {{ current_variant.price }}; // em centavos
+
+    // ---- Estado global ----
+    let currentImageIndex = 0;
+    let quantity = 1;
+    const GIFT_THRESHOLD = 39900; // R$ 399,00 em centavos
+
+    // ---- Galeria ----
+    function setMainImage(idx) {
+      // Oculta imagem atual
+      document.querySelectorAll('[id^="main-img-"]').forEach(img => img.classList.add('opacity-0'));
+      document.querySelectorAll('[data-thumb-index]').forEach(btn => btn.classList.remove('active', 'border-[#F4CDD4]'));
+      // Mostra a nova
+      const target = document.getElementById('main-img-' + idx);
+      if (target) { target.classList.remove('opacity-0'); target.style.opacity = '1'; }
+      const thumb = document.querySelector('[data-thumb-index="' + idx + '"]');
+      if (thumb) thumb.classList.add('active');
+      currentImageIndex = idx;
+    }
+
+    function nextImage() {
+      setMainImage((currentImageIndex + 1) % PRODUCT_IMAGES.length);
+    }
+    function prevImage() {
+      setMainImage((currentImageIndex - 1 + PRODUCT_IMAGES.length) % PRODUCT_IMAGES.length);
+    }
+
+    // ---- Fullscreen Modal ----
+    function openFullscreen(idx) {
+      const modal = document.getElementById('fullscreen-modal');
+      const img   = document.getElementById('fullscreen-img');
+      if (PRODUCT_IMAGES[idx]) img.src = PRODUCT_IMAGES[idx].url;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeFullscreen() {
+      document.getElementById('fullscreen-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // ---- Quantidade + Preço Dinâmico ----
+    function changeQty(delta) {
+      quantity = Math.max(1, quantity + delta);
+      document.getElementById('qty-display').textContent = quantity;
+      document.getElementById('cart-qty').value = quantity;
+      updatePrices();
+    }
+
+    function formatMoney(cents) {
+      return 'R$ ' + (cents / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function updatePrices() {
+      const total = BASE_PRICE * quantity;
+      document.getElementById('display-price').textContent = formatMoney(total);
+      const cashback = document.getElementById('cashback-value');
+      if (cashback) cashback.textContent = formatMoney(Math.round(total * 0.05));
+      // Brinde
+      const banner = document.getElementById('gift-banner');
+      if (banner) banner.style.display = total >= GIFT_THRESHOLD ? 'flex' : 'none';
+    }
+
+    // ---- Sticky Bar ----
+    function initStickyBar() {
+      const btn  = document.getElementById('add-to-cart-btn');
+      const bar  = document.getElementById('sticky-bar');
+      if (!btn || !bar) return;
+      const observer = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          bar.classList.add('visible');
+        } else {
+          bar.classList.remove('visible');
+        }
+      }, { threshold: 0 });
+      observer.observe(btn);
+    }
+
+    // ---- Accordion ----
+    function toggleAccordion(id) {
+      const content = document.getElementById('acc-' + id);
+      const icon    = document.getElementById('acc-' + id + '-icon');
+      if (!content) return;
+      const isOpen = content.classList.contains('open');
+      content.classList.toggle('open', !isOpen);
+      content.style.display = isOpen ? 'none' : 'block';
+      if (icon) icon.style.transform = isOpen ? '' : 'rotate(180deg)';
+      const btn = content.previousElementSibling;
+      if (btn) btn.setAttribute('aria-expanded', String(!isOpen));
+    }
+
+    // ---- FAQ ----
+    function toggleFaq(idx) {
+      const buttons = document.querySelectorAll('#faq-list button');
+      const answers = document.querySelectorAll('#faq-list .faq-answer');
+      const icons   = document.querySelectorAll('#faq-list .faq-icon');
+      const isOpen  = !answers[idx].classList.contains('hidden');
+      // Fecha todos
+      answers.forEach(a => a.classList.add('hidden'));
+      icons.forEach(ic => ic.style.transform = '');
+      buttons.forEach(b => b.setAttribute('aria-expanded', 'false'));
+      // Abre o clicado (se estava fechado)
+      if (!isOpen) {
+        answers[idx].classList.remove('hidden');
+        icons[idx].style.transform = 'rotate(180deg)';
+        buttons[idx].setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // ---- Calcular Frete ----
+    function calcularFrete(e) {
+      e.preventDefault();
+      const cep = document.getElementById('cep-input').value.replace(/\D/g, '');
+      if (cep.length >= 8) {
+        document.getElementById('shipping-result').style.display = 'flex';
+      }
+    }
+
+    // ---- Stats Carousel ----
+    function scrollCarousel(dir) {
+      const el = document.getElementById('stats-carousel');
+      if (!el) return;
+      el.scrollBy({ left: dir === 'left' ? -el.clientWidth : el.clientWidth, behavior: 'smooth' });
+    }
+
+    // ---- Inicialização ----
+    document.addEventListener('DOMContentLoaded', function () {
+      initStickyBar();
+      // Accordion 1 aberto por padrão
+      const acc1 = document.getElementById('acc-1');
+      if (acc1) { acc1.style.display = 'block'; acc1.classList.add('open'); }
+    });
+  </script>
+
+</body>
+</html>

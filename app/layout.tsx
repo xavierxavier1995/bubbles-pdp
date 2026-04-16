@@ -12,6 +12,10 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'Bubbles Pet Profissional',
   description: 'Cosmética Pet Profissional de alta performance.',
+  other: {
+    'preconnect': ['https://images.unsplash.com', 'https://www.bubbles.com.br'],
+    'dns-prefetch': ['https://images.unsplash.com', 'https://www.bubbles.com.br'],
+  }
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
