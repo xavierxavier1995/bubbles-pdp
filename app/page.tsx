@@ -26,6 +26,30 @@ export default function ProjectHub() {
       icon: Package,
       status: 'Novo',
       statusColor: 'bg-purple-100 text-purple-700'
+    },
+    {
+      title: 'PDP Neutralizador Pineapple',
+      path: '/shampoo-pet-neutralizador-pineapple-essential-5l-1-5',
+      description: 'Clone com ajustes de preço, cashback e prazo de entrega automático.',
+      icon: Package,
+      status: 'Novo',
+      statusColor: 'bg-pink-100 text-pink-700'
+    },
+    {
+      title: 'PDP Kit Fondue de Chocolate',
+      path: '/kit-pet-fondue-de-chocolate-xperience-4-produtos',
+      description: 'Página de produto focada na experiência do kit Fondue Xperience.',
+      icon: Package,
+      status: 'Novo',
+      statusColor: 'bg-orange-100 text-orange-700'
+    },
+    {
+      title: 'PDP Kit Pet Perfumes',
+      path: '/kit-pet-perfumes-experimentacao',
+      description: 'Página de produto para o kit de experimentação de perfumes.',
+      icon: Package,
+      status: 'Novo',
+      statusColor: 'bg-teal-100 text-teal-700'
     }
   ];
 
