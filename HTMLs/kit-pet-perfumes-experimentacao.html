@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kit Pet Perfumes de Experimentação - Bubbles Pet</title>
+    <meta name="description" content="Explore 10 fragrâncias icônicas da Bubbles em um kit exclusivo de experimentação. 1.200 borrifadas, fixação de 7 dias e custo de R$ 0,14 por banho.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --pink: #f4cdd4;
+            --pink-dark: #eec0c9;
+            --pink-light: #fdf0f6;
+            --orange: #e65100;
+            --yellow-light: #fff8e7;
+            --amber: #ffe082;
+            --green: #2db85a;
+            --text-dark: #1a1a1a;
+            --text-mid: #555555;
+            --text-light: #999999;
+            --border: #f0f0f0;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: black;
+            background-color: white;
+            overflow-x: hidden;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes strong-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,211,102, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37,211,102, 0); }
+        }
+        .animate-strong-pulse {
+            animation: strong-pulse 1.5s infinite;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": "Kit Pet Perfumes de Experimentação",
+        "image": ["https://www.bubbles.com.br/cdn/shop/files/e853207538f4657d2a910faf993fec05.jpg"],
+        "description": "Explore 10 fragrâncias icônicas da Bubbles em um kit exclusivo de experimentação. 1.200 borrifadas, fixação de 7 dias e custo de R$ 0,14 por banho.",
+        "sku": "BUB-PERFUMES-EXP",
+        "mpn": "BUB-PERFUMES-EXP",
+        "brand": { "@type": "Brand", "name": "Bubbles Pet" },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://bubblespet.com.br/products/kit-pet-perfumes-experimentacao",
+          "priceCurrency": "BRL",
+          "price": "169.90",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "33"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quantas fragrâncias vêm no kit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "O kit contém 10 fragrâncias icônicas diferentes da Bubbles, cada uma com 30ml, totalizando 1.200 borrifadas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Qual é a fixação dos perfumes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Todos os perfumes possuem fixação de classe Eau de Parfum, com duração de até 7 dias na pelagem do pet."
+            }
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Início",
+            "item": "https://bubblespet.com.br/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Kits",
+            "item": "https://bubblespet.com.br/collections/kits"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Kit Pet Perfumes de Experimentação",
+            "item": "https://bubblespet.com.br/products/kit-pet-perfumes-experimentacao"
+          }
+        ]
+      }
+    ]
+    </script>
+</head>
+<body class="font-poppins">
+
+    <!-- Header / Top Bar (Marquee) -->
+    <div class="bg-black text-white py-2 overflow-hidden whitespace-nowrap relative z-50">
+        <div class="flex animate-marquee">
+            <span class="mx-8 text-[11px] font-bold tracking-widest uppercase">FRETE GRÁTIS ACIMA DE R$ 399</span>
+            <span class="mx-8 text-[11px] font-bold tracking-widest uppercase">ATÉ 6X SEM JUROS</span>
+            <span class="mx-8 text-[11px] font-bold tracking-widest uppercase">5% DE CASHBACK EM TODAS AS COMPRAS</span>
+            <span class="mx-8 text-[11px] font-bold tracking-widest uppercase">FRETE GRÁTIS ACIMA DE R$ 399</span>
+            <span class="mx-8 text-[11px] font-bold tracking-widest uppercase">ATÉ 6X SEM JUROS</span>
+            <span class="mx-8 text-[11px] font-bold tracking-widest uppercase">5% DE CASHBACK EM TODAS AS COMPRAS</span>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="max-w-[1200px] mx-auto px-4 py-3 text-[11px] text-[var(--text-mid)] flex items-center gap-2 overflow-x-auto no-scrollbar whitespace-nowrap">
+        <a href="#" class="hover:text-[var(--pink)]">Início</a>
+        <span>&gt;</span>
+        <a href="#" class="hover:text-[var(--pink)]">Kits</a>
+        <span>&gt;</span>
+        <span class="text-black">Kit Pet Perfumes de Experimentação</span>
+    </div>
+
+    <!-- Main Section -->
+    <main class="max-w-[1200px] mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-[55%_45%] gap-8 md:gap-12">
+
+        <!-- Gallery -->
+        <div class="flex flex-col md:flex-row gap-4 md:sticky md:top-24 self-start">
+            <div class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto no-scrollbar pb-2 md:pb-0 md:pr-2 md:w-24 flex-shrink-0" id="thumbnail-container">
+                <button class="thumbnail-btn relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-[var(--radius-sm)] overflow-hidden border-2 border-[#F4CDD4]" data-index="0">
+                    <img src="https://www.bubbles.com.br/cdn/shop/files/e853207538f4657d2a910faf993fec05.jpg" class="object-cover w-full h-full" alt="Perfumes 1">
+                </button>
+                <button class="thumbnail-btn relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-[var(--radius-sm)] overflow-hidden border-2 border-transparent" data-index="1">
+                    <img src="https://www.bubbles.com.br/cdn/shop/files/33dffdf4f9810a31be8ea7aef944a14b.jpg" class="object-cover w-full h-full" alt="Perfumes 2">
+                </button>
+                <button class="thumbnail-btn relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-[var(--radius-sm)] overflow-hidden border-2 border-transparent" data-index="2">
+                    <img src="https://www.bubbles.com.br/cdn/shop/files/f8c5b9c6b26d27ff9400171385b25c08.jpg" class="object-cover w-full h-full" alt="Perfumes 3">
+                </button>
+                <button class="thumbnail-btn relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-[var(--radius-sm)] overflow-hidden border-2 border-transparent" data-index="3">
+                    <img src="https://www.bubbles.com.br/cdn/shop/files/1d1f692a6a7bb45543eed46517b6473a.jpg" class="object-cover w-full h-full" alt="Perfumes 4">
+                </button>
+                <button class="thumbnail-btn relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-[var(--radius-sm)] overflow-hidden border-2 border-transparent" data-index="4">
+                    <img src="https://www.bubbles.com.br/cdn/shop/files/2a7bcc50f6a56561c54bd070b4169f31.jpg" class="object-cover w-full h-full" alt="Perfumes 5">
+                </button>
+            </div>
+
+            <div class="order-1 md:order-2 relative aspect-square w-full rounded-[var(--radius-xl)] bg-gray-100 overflow-hidden flex items-center justify-center group" id="main-image-container">
+                <button id="prev-img" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 hover:bg-white transition-colors z-10" aria-label="Previous Image">
+                    &#9664;
+                </button>
+                <button id="next-img" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 hover:bg-white transition-colors z-10" aria-label="Next Image">
+                    &#9654;
+                </button>
+                <img src="https://www.bubbles.com.br/cdn/shop/files/e853207538f4657d2a910faf993fec05.jpg" id="main-image" class="object-cover w-full h-full cursor-zoom-in" alt="Main Image">
+                <button class="absolute top-4 left-4 bg-white/80 backdrop-blur-sm p-2 rounded-lg shadow-sm hover:bg-white transition-colors" id="fullscreen-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Buy Box -->
+        <div class="flex flex-col buy-box">
+            <h1 class="text-[20px] md:text-[26px] font-semibold text-[var(--text-dark)] leading-[1.2] mb-2 uppercase">
+                Kit Pet Perfumes de Experimentação (10 Fragrâncias)
+            </h1>
+
+            <div class="flex items-center gap-2 mb-6">
+                <div class="flex text-[#F4A522]">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <span class="text-[13px] text-[var(--text-light)]">4.9 · </span>
+                <a href="#reviews" class="text-[13px] text-gray-500 underline font-medium">33 avaliações</a>
+            </div>
+
+            <div class="mb-4 flex gap-2">
+                <span class="bg-[var(--green)] text-white text-[12px] font-bold px-3 py-1 rounded-full uppercase">15% OFF</span>
+                <span class="bg-[#f4cdd4] text-black border border-[#eec0c9] text-[12px] font-bold px-3 py-1 rounded-full uppercase">BRINDE GRÁTIS</span>
+            </div>
+
+            <div class="mb-2 flex items-baseline gap-3">
+                <span class="text-[32px] md:text-[40px] font-semibold text-black tracking-tighter" id="total-price">R$ 169,90</span>
+                <span class="text-[15px] text-gray-400 line-through font-medium">R$ 199,90</span>
+            </div>
+
+            <div class="mb-6">
+                <span class="text-[13px] text-gray-500 font-medium" id="parcel-info">6x de R$ 28,31 sem juros</span>
+            </div>
+
+            <div class="flex items-center justify-between text-[14px] text-[#666] mb-6 font-medium">
+                <div class="flex items-center gap-1">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" /><path d="M16 21v-5h5" /><path d="M14 10h-3a1.5 1.5 0 0 0 0 3h2a1.5 1.5 0 0 1 0 3h-3" /><path d="M12 8v8" /></svg>
+                    <span>Ganhe <strong class="text-black" id="cashback-val">R$ 8,49</strong> de cashback</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-0 border border-gray-200 rounded-[10px] bg-[#f7f7f7] mb-4">
+                <div class="p-4 text-center border-r border-gray-200">
+                    <span class="block text-[10px] text-gray-400 uppercase font-medium tracking-widest mb-1">Rendimento</span>
+                    <span class="block text-[15px] font-medium text-black">1.200 borrifadas</span>
+                </div>
+                <div class="p-4 text-center">
+                    <span class="block text-[10px] text-gray-400 uppercase font-medium tracking-widest mb-1">Custo/Banho</span>
+                    <span class="block text-[15px] font-medium text-black">R$ 0,14</span>
+                </div>
+            </div>
+
+            <!-- Quantity & Buy Button -->
+            <div class="mb-4">
+                <p class="font-bold text-[12px] text-[var(--text-dark)] uppercase mb-2">QUANTIDADE:</p>
+                <div class="flex gap-3">
+                    <div class="flex items-center border border-[#E0E0E0] rounded-[var(--radius-md)] h-[52px] bg-white w-[120px]">
+                        <button class="w-10 h-full flex items-center justify-center text-[var(--text-mid)] hover:text-[var(--pink)]" id="qty-minus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                        <span class="flex-1 text-center font-bold text-[16px]" id="qty-val">1</span>
+                        <button class="w-10 h-full flex items-center justify-center text-[var(--text-mid)] hover:text-[var(--pink)]" id="qty-plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                    </div>
+                    <button class="flex-1 h-[52px] bg-[#25D366] hover:bg-[#1DA851] text-white font-semibold text-[18px] uppercase tracking-wide rounded-[10px] transition-all hover:shadow-lg active:scale-95" id="add-to-cart-trigger">Comprar</button>
+                </div>
+            </div>
+
+            <!-- Shipping -->
+            <div class="p-4 bg-[#fdf0f6] border border-[#f4cdd4] rounded-[12px] mb-6 flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-[var(--green)] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-[13px] font-bold text-black leading-tight">Chegará entre 26 de abril e 04 de maio</span>
+                    <span class="text-[12px] text-gray-500 font-medium">Confirme o prazo final na próxima etapa.</span>
+                </div>
+            </div>
+
+            <!-- Emblems -->
+            <div class="flex justify-between items-center pt-6 border-t border-[var(--border)] gap-2">
+                <div class="flex flex-col items-center gap-1">
+                    <div class="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center bg-white">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <span class="text-[9px] uppercase font-bold text-center">Linha Premium</span>
+                </div>
+                <div class="flex flex-col items-center gap-1">
+                    <div class="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center bg-white">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line></svg>
+                    </div>
+                    <span class="text-[9px] uppercase font-bold text-center">100% Veganos</span>
+                </div>
+                <div class="flex flex-col items-center gap-1">
+                    <div class="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center bg-white">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    </div>
+                    <span class="text-[9px] uppercase font-bold text-center">Cruelty Free</span>
+                </div>
+                <div class="flex flex-col items-center gap-1">
+                    <div class="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center bg-white">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5"><path d="M12 2a10 10 0 0 0-9.95 9m19.9 0a10 10 0 0 0-19.9 0"></path><path d="M8.5 12a3.5 3.5 0 0 1 7 0"></path></svg>
+                    </div>
+                    <span class="text-[9px] uppercase font-bold text-center">100% Nacional</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Info Section -->
+    <section class="bg-white py-16 px-4 border-t border-b border-gray-100 mt-12">
+        <div class="max-w-[1240px] mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+            <div class="md:w-1/3 text-center md:text-left">
+                <h2 class="text-[32px] md:text-[40px] font-semibold text-black leading-[1.1] uppercase tracking-tighter">
+                    Descubra Suas <br> Fragrâncias <br> Favoritas.
+                </h2>
+            </div>
+            <div class="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-[#F4CDD4] flex items-center justify-center text-black">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-[16px] text-black uppercase mb-1">10 Fragrâncias Premium</h4>
+                        <p class="text-[13px] text-gray-400 font-medium leading-relaxed">Explore as aromas mais icônicas e desejadas da coleção Bubbles em um único kit.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-[#F4CDD4] flex items-center justify-center text-black">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-[16px] text-black uppercase mb-1">Fixação de 7 Dias</h4>
+                        <p class="text-[13px] text-gray-400 font-medium leading-relaxed">Perfumes com classe Eau de Parfum que garantem longa duração e intensidade olfativa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="bg-[var(--pink-light)] py-16 px-4 mt-12">
+        <div class="max-w-[800px] mx-auto">
+            <h2 class="text-center text-[22px] md:text-[26px] font-semibold text-[var(--text-dark)] mb-8">O que os groomers estão dizendo</h2>
+            <div class="space-y-4" id="reviews-container">
+                <div class="bg-white rounded-[var(--radius-md)] p-6 shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="font-bold text-[15px]">Marcelly Ferreira</span>
+                        <span class="text-[12px] text-[var(--text-light)]">07/03/2026</span>
+                    </div>
+                    <p class="font-bold text-[14px] mb-1">Os perfumes são ótimos</p>
+                    <p class="text-[14px] text-[var(--text-mid)] leading-relaxed">"Os perfumes são ótimos, um com o cheiro mais gostoso que o outro, eu já uso o EGO chocolate belga e tem uma excelente fixação. Vou testar os outros nos clientes para receber os feedbacks."</p>
+                </div>
+                <div class="bg-white rounded-[var(--radius-md)] p-6 shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="font-bold text-[15px]">Yasmin Rufino</span>
+                        <span class="text-[12px] text-[var(--text-light)]">01/12/2025</span>
+                    </div>
+                    <p class="font-bold text-[14px] mb-1">Maravilhoso demais</p>
+                    <p class="text-[14px] text-[var(--text-mid)] leading-relaxed">"Ideal para experimentarmos e comprarmos os que mais nos agrada🤩👏"</p>
+                </div>
+                <div class="bg-white rounded-[var(--radius-md)] p-6 shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="font-bold text-[15px]">JAQUELINE DOMINGUES</span>
+                        <span class="text-[12px] text-[var(--text-light)]">12/11/2025</span>
+                    </div>
+                    <p class="font-bold text-[14px] mb-1">ma-ra-vi-lho-sos!</p>
+                    <p class="text-[14px] text-[var(--text-mid)] leading-relaxed">"Esses perfumes são ma-ra-vi-lho-sos! Todos são uma delícia, sem exceção."</p>
+                </div>
+                <div class="bg-white rounded-[var(--radius-md)] p-6 shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="font-bold text-[15px]">Renata Alves</span>
+                        <span class="text-[12px] text-[var(--text-light)]">05/11/2025</span>
+                    </div>
+                    <p class="font-bold text-[14px] mb-1">Amei</p>
+                    <p class="text-[14px] text-[var(--text-mid)] leading-relaxed">"Amei, veio até brinde 🥰"</p>
+                </div>
+                <div class="bg-white rounded-[var(--radius-md)] p-6 shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="font-bold text-[15px]">Magna Ferreira</span>
+                        <span class="text-[12px] text-[var(--text-light)]">30/07/2025</span>
+                    </div>
+                    <p class="font-bold text-[14px] mb-1">A quantidade e pouco apenas 30ml</p>
+                    <p class="text-[14px] text-[var(--text-mid)] leading-relaxed">"A quantidade e pouco apenas 30ml. Porem como gosto de variar muito, pois meus clientes sempre são o mesmo, vale o preço. Assim tenho 10 fragrâncias como opção e não enjoo do cheiro tão fácil. Fale sim comprar."</p>
+                </div>
+            </div>
+            <div class="flex justify-center mt-8">
+                <button class="px-8 py-3 border-2 border-black text-black font-bold rounded-full hover:bg-gray-50 transition-colors" id="load-more-reviews">Ver todas as 33 avaliações ›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="max-w-[800px] mx-auto px-4 py-16">
+        <h2 class="text-center text-[24px] md:text-[28px] font-semibold text-[var(--text-dark)] mb-8">Perguntas Frequentes</h2>
+        <div class="space-y-3">
+            <div class="faq-item border border-[var(--border)] rounded-[var(--radius-md)] overflow-hidden bg-white">
+                <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors">
+                    <span class="font-semibold text-[15px] text-[var(--text-dark)]">Quantas fragrâncias vêm no kit?</span>
+                    <svg class="w-5 h-5 text-[var(--text-mid)] transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="faq-content px-6 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+                    <p class="pb-5 pt-1 text-[14px] text-[var(--text-mid)] leading-relaxed">O kit contém 10 fragrâncias icônicas diferentes da Bubbles, cada uma com 30ml, totalizando 1.200 borrifadas.</p>
+                </div>
+            </div>
+            <div class="faq-item border border-[var(--border)] rounded-[var(--radius-md)] overflow-hidden bg-white">
+                <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors">
+                    <span class="font-semibold text-[15px] text-[var(--text-dark)]">Qual é a fixação dos perfumes?</span>
+                    <svg class="w-5 h-5 text-[var(--text-mid)] transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="faq-content px-6 overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+                    <p class="pb-5 pt-1 text-[14px] text-[var(--text-mid)] leading-relaxed">Todos os perfumes possuem fixação de classe Eau de Parfum, com duração de até 7 dias na pelagem do pet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky Bottom Bar -->
+    <div id="sticky-bar" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3 md:px-8 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-[999] translate-y-full transition-transform duration-300 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-md overflow-hidden border border-gray-100 hidden sm:block">
+                <img src="https://www.bubbles.com.br/cdn/shop/files/e853207538f4657d2a910faf993fec05.jpg" class="object-cover w-full h-full" alt="Mini">
+            </div>
+            <div class="flex flex-col">
+                <span class="text-[12px] font-bold text-[var(--text-dark)] truncate max-w-[180px]">Kit Pet Perfumes Experimentação</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-[15px] md:text-[18px] font-semibold text-black" id="sticky-price">R$ 169,90</span>
+                </div>
+            </div>
+        </div>
+        <button class="bg-[#25D366] text-white font-semibold uppercase px-6 py-2 md:py-3 md:px-8 rounded-[var(--radius-md)] text-[16px] md:text-[18px]">Comprar</button>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        const qtyVal = document.getElementById('qty-val');
+        const qtyMinus = document.getElementById('qty-minus');
+        const qtyPlus = document.getElementById('qty-plus');
+        const totalPrice = document.getElementById('total-price');
+        const parcelInfo = document.getElementById('parcel-info');
+        const cashbackVal = document.getElementById('cashback-val');
+        const stickyPrice = document.getElementById('sticky-price');
+        let quantity = 1;
+        const basePrice = 169.90;
+
+        function updateUI() {
+            qtyVal.textContent = quantity;
+            const total = (basePrice * quantity).toFixed(2);
+            const totalFormatted = total.replace('.', ',');
+            totalPrice.textContent = `R$ ${totalFormatted}`;
+            const parcelPrice = (parseFloat(total) / 6).toFixed(2).replace('.', ',');
+            parcelInfo.textContent = `6x de R$ ${parcelPrice} sem juros`;
+            cashbackVal.textContent = `R$ ${(basePrice * quantity * 0.05).toFixed(2).replace('.', ',')}`;
+            stickyPrice.textContent = `R$ ${totalFormatted}`;
+        }
+
+        qtyMinus.onclick = () => { if (quantity > 1) { quantity--; updateUI(); } };
+        qtyPlus.onclick = () => { quantity++; updateUI(); };
+
+        const images = [
+            "https://www.bubbles.com.br/cdn/shop/files/e853207538f4657d2a910faf993fec05.jpg",
+            "https://www.bubbles.com.br/cdn/shop/files/33dffdf4f9810a31be8ea7aef944a14b.jpg",
+            "https://www.bubbles.com.br/cdn/shop/files/f8c5b9c6b26d27ff9400171385b25c08.jpg",
+            "https://www.bubbles.com.br/cdn/shop/files/1d1f692a6a7bb45543eed46517b6473a.jpg",
+            "https://www.bubbles.com.br/cdn/shop/files/2a7bcc50f6a56561c54bd070b4169f31.jpg"
+        ];
+        let currentIndex = 0;
+        const mainImage = document.getElementById('main-image');
+        const thumbnails = document.querySelectorAll('.thumbnail-btn');
+
+        function updateMainImage(index) {
+            mainImage.src = images[index];
+            thumbnails.forEach(t => {
+                t.classList.remove('border-[#F4CDD4]');
+                t.classList.add('border-transparent');
+            });
+            thumbnails[index].classList.add('border-[#F4CDD4]');
+            thumbnails[index].classList.remove('border-transparent');
+            currentIndex = index;
+        }
+
+        thumbnails.forEach((btn, idx) => {
+            btn.onclick = () => updateMainImage(idx);
+        });
+
+        const prevBtn = document.getElementById('prev-img');
+        const nextBtn = document.getElementById('next-img');
+        prevBtn.onclick = () => {
+            const newIndex = (currentIndex - 1 + images.length) % images.length;
+            updateMainImage(newIndex);
+        };
+        nextBtn.onclick = () => {
+            const newIndex = (currentIndex + 1) % images.length;
+            updateMainImage(newIndex);
+        };
+
+        document.querySelectorAll('.faq-trigger').forEach(trigger => {
+            trigger.onclick = () => {
+                const content = trigger.nextElementSibling;
+                const icon = trigger.querySelector('svg');
+                const isOpen = content.style.maxHeight !== '0px' && content.style.maxHeight !== '';
+
+                document.querySelectorAll('.faq-content').forEach(c => c.style.maxHeight = '0px');
+                document.querySelectorAll('.faq-trigger svg').forEach(s => s.style.transform = 'rotate(0deg)');
+
+                if (!isOpen) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            };
+        });
+
+        const stickyBar = document.getElementById('sticky-bar');
+        const trigger = document.getElementById('add-to-cart-trigger');
+
+        const observer = new IntersectionObserver(([entry]) => {
+            if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+                stickyBar.classList.remove('translate-y-full');
+            } else {
+                stickyBar.classList.add('translate-y-full');
+            }
+        }, { threshold: 0 });
+
+        observer.observe(trigger);
+
+        const loadMoreBtn = document.getElementById('load-more-reviews');
+        const reviewsContainer = document.getElementById('reviews-container');
+        const allReviews = Array.from(reviewsContainer.children);
+        const initialCount = 5;
+        function showInitialReviews() {
+            allReviews.forEach((rev, idx) => {
+                rev.style.display = idx < initialCount ? 'block' : 'none';
+            });
+        }
+        loadMoreBtn.onclick = () => {
+            allReviews.forEach(rev => rev.style.display = 'block');
+            loadMoreBtn.style.display = 'none';
+        };
+        showInitialReviews();
+    </script>
+</body>
+</html>
